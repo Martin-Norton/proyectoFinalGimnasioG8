@@ -8,24 +8,21 @@ private int idClase;
 private String nombreClase;
 private int idEntrenador;
 private LocalTime horarioClase; // es de tipo time
-private int capacidad = 20;// setear en 20
+private int capacidad;// setear en 20
 private boolean estado;
 
     public Clase() {
     }
 
-    public Clase(int idClase, String nombreClase, int idEntrenador, LocalTime horarioClase, boolean estado) {
-        this.idClase = idClase;
+    public Clase(String nombreClase, int idEntrenador, LocalTime horarioClase, int capacidad, boolean estado) {
         this.nombreClase = nombreClase;
         this.idEntrenador = idEntrenador;
         this.horarioClase = horarioClase;
+        this.capacidad = capacidad;
         this.estado = estado;
     }
 
-
-
-
-
+ 
     public int getIdClase() {
         return idClase;
     }
