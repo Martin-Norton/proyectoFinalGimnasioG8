@@ -17,9 +17,10 @@ public class Pruebas {
        
 //Crear una clase
     ClaseData clase = new ClaseData();
-    Clase clase1 = new Clase("Pilates", 0, LocalTime.NOON, 0, true);
+    Clase clase1 = new Clase("Pilates", 4, LocalTime.parse("13:00:00"), 20, true);
     clase.agregarClase(clase1);
 
     }
+    
     
 }
