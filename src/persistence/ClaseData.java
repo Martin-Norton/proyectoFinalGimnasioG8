@@ -4,6 +4,7 @@ import entities.Clase;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ClaseData {
     private Connection connection;
@@ -13,14 +14,19 @@ public class ClaseData {
     }
 
     public void agregarClase(Clase clase) {
-        String query = "INSERT INTO Clases (Nombre, Id_Entrenador, Horario, Capacidad, Estado) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO clases (Nombre, Id_Entrenador, Horario, Capacidad, Estado) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, clase.getNombreClase());
             ps.setInt(2, clase.getIdEntrenador());
             ps.setTime(3, Time.valueOf(clase.getHorarioClase()));
             ps.setInt(4, clase.getCapacidad());
             ps.setBoolean(5, clase.isEstado());
-            ps.executeUpdate();
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Clase agregada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al agregar la clase.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -28,7 +34,7 @@ public class ClaseData {
 
     public List<Clase> listarClases() {
         List<Clase> clases = new ArrayList<>();
-        String query = "SELECT * FROM Clases";
+        String query = "SELECT * FROM clases";
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 Clase clase = new Clase();
@@ -48,7 +54,7 @@ public class ClaseData {
 
     public Clase listarClasesPorId(int id) {
         Clase clase = null;
-        String query = "SELECT * FROM Clases WHERE Id_Clase = ?";
+        String query = "SELECT * FROM clases WHERE Id_Clase = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -69,7 +75,7 @@ public class ClaseData {
     }
 
     public void actualizarClase(Clase clase) {
-        String query = "UPDATE Clases SET Nombre = ?, Id_Entrenador = ?, Horario = ?, Capacidad = ?, Estado = ? WHERE Id_Clase = ?";
+        String query = "UPDATE clases SET Nombre = ?, Id_Entrenador = ?, Horario = ?, Capacidad = ?, Estado = ? WHERE Id_Clase = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, clase.getNombreClase());
             ps.setInt(2, clase.getIdEntrenador());
@@ -77,19 +83,30 @@ public class ClaseData {
             ps.setInt(4, clase.getCapacidad());
             ps.setBoolean(5, clase.isEstado());
             ps.setInt(6, clase.getIdClase());
-            ps.executeUpdate();
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Clase actualizada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al actualizar la clase.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     public void borrarClase(int id) {
-        String query = "DELETE FROM Clases WHERE Id_Clase = ?";
+        String query = "DELETE FROM clases WHERE Id_Clase = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
-            ps.executeUpdate();
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Clase eliminada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al eliminar la clase.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 }
+

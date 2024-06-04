@@ -1,22 +1,22 @@
 package entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Asistencia {
 private int idAsistencia;
 private int idSocio;
 private int idAclase;
-private Date fechaAsistencia; //es de tipo
+private LocalDate fechaAsistencia; 
 
     public Asistencia() {
     }
 
-    public Asistencia(int idAsistencia, int idSocio, int idAclase, Date fechaAsistencia) {
-        this.idAsistencia = idAsistencia;
+    public Asistencia(int idSocio, int idAclase, LocalDate fechaAsistencia) {
         this.idSocio = idSocio;
         this.idAclase = idAclase;
         this.fechaAsistencia = fechaAsistencia;
     }
+
 
     public int getIdAsistencia() {
         return idAsistencia;
@@ -42,12 +42,14 @@ private Date fechaAsistencia; //es de tipo
         this.idAclase = idAclase;
     }
 
-    public Date getFechaAsistencia() {
+    public LocalDate getFechaAsistencia() {
         return fechaAsistencia;
     }
 
-    public void setFechaAsistencia(Date fechaAsistencia) {
+    public void setFechaAsistencia(LocalDate fechaAsistencia) {
         this.fechaAsistencia = fechaAsistencia;
-    } 
+    }
+
+
 
 }
