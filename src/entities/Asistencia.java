@@ -4,16 +4,18 @@ import java.time.LocalDate;
 
 public class Asistencia {
 private int idAsistencia;
-private int idSocio;
-private int idAclase;
+private Socio socio;
+private Clase clase;
 private LocalDate fechaAsistencia; 
 
     public Asistencia() {
     }
 
-    public Asistencia(int idSocio, int idAclase, LocalDate fechaAsistencia) {
-        this.idSocio = idSocio;
-        this.idAclase = idAclase;
+
+    public Asistencia(int idAsistencia, Socio socio, Clase clase, LocalDate fechaAsistencia) {
+        this.idAsistencia = idAsistencia;
+        this.socio = socio;
+        this.clase = clase;
         this.fechaAsistencia = fechaAsistencia;
     }
 
@@ -26,20 +28,20 @@ private LocalDate fechaAsistencia;
         this.idAsistencia = idAsistencia;
     }
 
-    public int getIdSocio() {
-        return idSocio;
+    public Socio getSocio() {
+        return socio;
     }
 
-    public void setIdSocio(int idSocio) {
-        this.idSocio = idSocio;
+    public void setSocio(Socio socio) {
+        this.socio = socio;
     }
 
-    public int getIdAclase() {
-        return idAclase;
+    public Clase getClase() {
+        return clase;
     }
 
-    public void setIdAclase(int idAclase) {
-        this.idAclase = idAclase;
+    public void setClase(Clase clase) {
+        this.clase = clase;
     }
 
     public LocalDate getFechaAsistencia() {

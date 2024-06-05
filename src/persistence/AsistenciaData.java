@@ -1,6 +1,8 @@
 package persistence;
 
 import entities.Asistencia;
+import entities.Clase;
+import entities.Socio;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +17,10 @@ public class AsistenciaData {
     }
 
     public void agregarAsistencia(Asistencia asistencia) {
+        Socio socio = asistencia.getSocio();
         String sql = "INSERT INTO asistencia (ID_Socio, ID_Clase, Fecha_Asistencia) VALUES (?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, asistencia.getIdSocio());
+            statement.setInt(1, socio.get);
             statement.setInt(2, asistencia.getIdAclase());
             statement.setDate(3, Date.valueOf(asistencia.getFechaAsistencia())); // LocalDate a Date  
 
