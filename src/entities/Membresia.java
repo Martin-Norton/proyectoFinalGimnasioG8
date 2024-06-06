@@ -1,21 +1,22 @@
 package entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 
 public class Membresia {
 private int idMembresia;
 private Socio socio;
-private Date fechaInicio;
-private Date fechaFin;
+private LocalDate fechaInicio;
+private LocalDate fechaFin;
 private int cantPases; //a medida que asiste a clases se agota la cap de su membresía (consultar si esto define el tipo de membresía)
 private double costo;
-private boolean estado;
+private int estado;
 
     public Membresia() {
     }
 
-    public Membresia(int idMembresia, Socio socio, Date fechaInicio, Date fechaFin, int cantPases, double costo, boolean estado) {
+    public Membresia(int idMembresia, Socio socio, LocalDate fechaInicio, LocalDate fechaFin, int cantPases, double costo, int estado) {
         this.idMembresia = idMembresia;
         this.socio = socio;
         this.fechaInicio = fechaInicio;
@@ -25,7 +26,7 @@ private boolean estado;
         this.estado = estado;
     }
 
-    public Membresia(Socio socio, Date fechaInicio, Date fechaFin, int cantPases, double costo, boolean estado) {
+    public Membresia(Socio socio, LocalDate fechaInicio, LocalDate fechaFin, int cantPases, double costo, int estado) {
         this.socio = socio;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -33,8 +34,6 @@ private boolean estado;
         this.costo = costo;
         this.estado = estado;
     }
-
-
 
     public int getIdMembresia() {
         return idMembresia;
@@ -52,19 +51,19 @@ private boolean estado;
         this.socio = socio;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -84,13 +83,18 @@ private boolean estado;
         this.costo = costo;
     }
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
-
+    @Override
+    public String toString() {
+        return "Membresia{" + "idMembresia=" + idMembresia + ", socio=" + socio + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", cantPases=" + cantPases + ", costo=" + costo + ", estado=" + estado + '}';
+    }
+    
 }
+    

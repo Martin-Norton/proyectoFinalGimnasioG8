@@ -2,7 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
         <group name="Guia_1"/>
+        <group>
+            <file>file:/D:/Desktop/programacion%20segundo%20cuatrimestre/Laboratorio%201/proyectoFinalGimnasioG8/src/entities/Clase.java</file>
+            <file>file:/D:/Desktop/programacion%20segundo%20cuatrimestre/Laboratorio%201/proyectoFinalGimnasioG8/src/entities/Membresia.java</file>
+            <file>file:/D:/Desktop/programacion%20segundo%20cuatrimestre/Laboratorio%201/proyectoFinalGimnasioG8/src/test/Pruebas.java</file>
+            <file>file:/D:/Desktop/programacion%20segundo%20cuatrimestre/Laboratorio%201/proyectoFinalGimnasioG8/src/persistence/MembresiaData.java</file>
+            <file>file:/D:/Desktop/programacion%20segundo%20cuatrimestre/Laboratorio%201/proyectoFinalGimnasioG8/src/persistence/EntrenadorData.java</file>
+            <file>file:/D:/Desktop/programacion%20segundo%20cuatrimestre/Laboratorio%201/proyectoFinalGimnasioG8/src/persistence/ClaseData.java</file>
+            <file>file:/D:/Desktop/programacion%20segundo%20cuatrimestre/Laboratorio%201/proyectoFinalGimnasioG8/src/persistence/Conexion.java</file>
+        </group>
     </open-files>
 </project-private>
