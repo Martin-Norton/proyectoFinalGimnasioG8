@@ -1,12 +1,10 @@
 package entities;
-
-import java.sql.Time;
 import java.time.LocalTime;
 
 public class Clase {
 private int idClase;
 private String nombreClase;
-private int idEntrenador;
+private Entrenador entrenador;
 private LocalTime horarioClase; // es de tipo time
 private int capacidad;// setear en 20
 private boolean estado;
@@ -14,13 +12,23 @@ private boolean estado;
     public Clase() {
     }
 
-    public Clase(String nombreClase, int idEntrenador, LocalTime horarioClase, int capacidad, boolean estado) {
+    public Clase(int idClase, String nombreClase, Entrenador entrenador, LocalTime horarioClase, int capacidad, boolean estado) {
+        this.idClase = idClase;
         this.nombreClase = nombreClase;
-        this.idEntrenador = idEntrenador;
+        this.entrenador = entrenador;
         this.horarioClase = horarioClase;
         this.capacidad = capacidad;
         this.estado = estado;
     }
+
+    public Clase(String nombreClase, Entrenador entrenador, LocalTime horarioClase, int capacidad, boolean estado) {
+        this.nombreClase = nombreClase;
+        this.entrenador = entrenador;
+        this.horarioClase = horarioClase;
+        this.capacidad = capacidad;
+        this.estado = estado;
+    }
+
 
  
     public int getIdClase() {
@@ -39,13 +47,14 @@ private boolean estado;
         this.nombreClase = nombreClase;
     }
 
-    public int getIdEntrenador() {
-        return idEntrenador;
+    public Entrenador getEntrenador() {
+        return entrenador;
     }
 
-    public void setIdEntrenador(int idEntrenador) {
-        this.idEntrenador = idEntrenador;
+    public void setEntrenador(Entrenador entrenador) {
+        this.entrenador = entrenador;
     }
+
 
     public LocalTime getHorarioClase() {
         return horarioClase;
@@ -71,10 +80,5 @@ private boolean estado;
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
-    
-
-
-
 
 }

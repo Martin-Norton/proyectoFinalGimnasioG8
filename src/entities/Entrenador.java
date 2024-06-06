@@ -1,12 +1,13 @@
 package entities;
 
 public class Entrenador {
+
     private int idEntrenador;
-private String nombreEntrenador; 
-private String apellidoEntrenador; 
-private String dniEntrenador;
-private String especialidad; // armar combo con especialidades posibles desde la vista
-private boolean estado;
+    private String nombreEntrenador;
+    private String apellidoEntrenador;
+    private String dniEntrenador;
+    private String especialidad; // armar combo con especialidades posibles desde la vista
+    private boolean estado;
 
     public Entrenador() {
     }
@@ -66,10 +67,5 @@ private boolean estado;
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
-    
-
-
-
 
 }

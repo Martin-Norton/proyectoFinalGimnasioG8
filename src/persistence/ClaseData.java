@@ -1,9 +1,8 @@
 package persistence;
-
 import entities.Clase;
+import entities.Entrenador;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 public class ClaseData {
@@ -17,7 +16,7 @@ public class ClaseData {
         String query = "INSERT INTO clases (Nombre, Id_Entrenador, Horario, Capacidad, Estado) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, clase.getNombreClase());
-            ps.setInt(2, clase.getIdEntrenador());
+            ps.setInt(2, clase.getEntrenador().getIdEntrenador());
             ps.setTime(3, Time.valueOf(clase.getHorarioClase()));
             ps.setInt(4, clase.getCapacidad());
             ps.setBoolean(5, clase.isEstado());
@@ -40,7 +39,9 @@ public class ClaseData {
                 Clase clase = new Clase();
                 clase.setIdClase(rs.getInt("Id_Clase"));
                 clase.setNombreClase(rs.getString("Nombre"));
-                clase.setIdEntrenador(rs.getInt("Id_Entrenador"));
+                // Aquí deberías cargar el entrenador desde la base de datos
+                Entrenador entrenador = new Entrenador(); // Aquí deberías cargar el entrenador desde la base de datos
+                clase.setEntrenador(entrenador);
                 clase.setHorarioClase(rs.getTime("Horario").toLocalTime());
                 clase.setCapacidad(rs.getInt("Capacidad"));
                 clase.setEstado(rs.getBoolean("Estado"));
@@ -62,7 +63,9 @@ public class ClaseData {
                     clase = new Clase();
                     clase.setIdClase(rs.getInt("Id_Clase"));
                     clase.setNombreClase(rs.getString("Nombre"));
-                    clase.setIdEntrenador(rs.getInt("Id_Entrenador"));
+                    // Aquí deberías cargar el entrenador desde la base de datos
+                    Entrenador entrenador = new Entrenador(); // Aquí deberías cargar el entrenador desde la base de datos
+                    clase.setEntrenador(entrenador);
                     clase.setHorarioClase(rs.getTime("Horario").toLocalTime());
                     clase.setCapacidad(rs.getInt("Capacidad"));
                     clase.setEstado(rs.getBoolean("Estado"));
@@ -78,7 +81,7 @@ public class ClaseData {
         String query = "UPDATE clases SET Nombre = ?, Id_Entrenador = ?, Horario = ?, Capacidad = ?, Estado = ? WHERE Id_Clase = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, clase.getNombreClase());
-            ps.setInt(2, clase.getIdEntrenador());
+            ps.setInt(2, clase.getEntrenador().getIdEntrenador());
             ps.setTime(3, Time.valueOf(clase.getHorarioClase()));
             ps.setInt(4, clase.getCapacidad());
             ps.setBoolean(5, clase.isEstado());
@@ -109,4 +112,5 @@ public class ClaseData {
         }
     }
 }
+
 

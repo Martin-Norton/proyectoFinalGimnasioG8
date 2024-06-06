@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Membresia {
 private int idMembresia;
-private int idSocio;
+private Socio socio;
 private Date fechaInicio;
 private Date fechaFin;
 private int cantPases; //a medida que asiste a clases se agota la cap de su membresía (consultar si esto define el tipo de membresía)
@@ -15,15 +15,26 @@ private boolean estado;
     public Membresia() {
     }
 
-    public Membresia(int idMembresia, int idSocio, Date fechaInicio, Date fechaFin, int cantPases, double costo, boolean estado) {
+    public Membresia(int idMembresia, Socio socio, Date fechaInicio, Date fechaFin, int cantPases, double costo, boolean estado) {
         this.idMembresia = idMembresia;
-        this.idSocio = idSocio;
+        this.socio = socio;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.cantPases = cantPases;
         this.costo = costo;
         this.estado = estado;
     }
+
+    public Membresia(Socio socio, Date fechaInicio, Date fechaFin, int cantPases, double costo, boolean estado) {
+        this.socio = socio;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.cantPases = cantPases;
+        this.costo = costo;
+        this.estado = estado;
+    }
+
+
 
     public int getIdMembresia() {
         return idMembresia;
@@ -33,12 +44,12 @@ private boolean estado;
         this.idMembresia = idMembresia;
     }
 
-    public int getIdSocio() {
-        return idSocio;
+    public Socio getSocio() {
+        return socio;
     }
 
-    public void setIdSocio(int idSocio) {
-        this.idSocio = idSocio;
+    public void setSocio(Socio socio) {
+        this.socio = socio;
     }
 
     public Date getFechaInicio() {
@@ -80,10 +91,6 @@ private boolean estado;
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
-
-
-    
 
 
 }
