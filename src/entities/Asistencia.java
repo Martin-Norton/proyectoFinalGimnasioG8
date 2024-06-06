@@ -1,5 +1,4 @@
 package entities;
-
 import java.time.LocalDate;
 
 public class Asistencia {
@@ -11,9 +10,7 @@ private LocalDate fechaAsistencia;
     public Asistencia() {
     }
 
-
-    public Asistencia(int idAsistencia, Socio socio, Clase clase, LocalDate fechaAsistencia) {
-        this.idAsistencia = idAsistencia;
+    public Asistencia(Socio socio, Clase clase, LocalDate fechaAsistencia) {
         this.socio = socio;
         this.clase = clase;
         this.fechaAsistencia = fechaAsistencia;

@@ -11,18 +11,16 @@ import javax.swing.JOptionPane;
 public class AsistenciaData {
 
     private Connection connection;
-
     public AsistenciaData() {
         connection = Conexion.getConexion();
     }
 
     public void agregarAsistencia(Asistencia asistencia) {
-        Socio socio = asistencia.getSocio();
-        String sql = "INSERT INTO asistencia (ID_Socio, ID_Clase, Fecha_Asistencia) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO asistencia (Id_Socio, ID_Clase, Fecha_Asistencia) VALUES (?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, socio.get);
-            statement.setInt(2, asistencia.getIdAclase());
-            statement.setDate(3, Date.valueOf(asistencia.getFechaAsistencia())); // LocalDate a Date  
+            statement.setInt(1, asistencia.getSocio().getIdSocio()); 
+            statement.setInt(2, asistencia.getClase().getIdClase()); 
+            statement.setDate(3, Date.valueOf(asistencia.getFechaAsistencia()));  
 
             int filasAfectadas = statement.executeUpdate();
             if (filasAfectadas > 0) {
@@ -36,10 +34,10 @@ public class AsistenciaData {
     }
 
     public void actualizarAsistencia(Asistencia asistencia) {
-        String sql = "UPDATE asistencia SET ID_Socio = ?, ID_Aclase = ?, Fecha_Asistencia = ? WHERE ID_Asistencia = ?";
+        String sql = "UPDATE asistencia SET ID_Socio = ?, ID_Clase = ?, Fecha_Asistencia = ? WHERE ID_Asistencia = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, asistencia.getIdSocio());
-            statement.setInt(2, asistencia.getIdAclase());
+            statement.setInt(1, asistencia.getSocio().getIdSocio()); // Obtener el ID del socio
+            statement.setInt(2, asistencia.getClase().getIdClase()); // Obtener el ID de la clase
             statement.setDate(3, Date.valueOf(asistencia.getFechaAsistencia()));
             statement.setInt(4, asistencia.getIdAsistencia());
 
@@ -78,8 +76,16 @@ public class AsistenciaData {
                 if (resultSet.next()) {
                     Asistencia asistencia = new Asistencia();
                     asistencia.setIdAsistencia(resultSet.getInt("ID_Asistencia"));
-                    asistencia.setIdSocio(resultSet.getInt("ID_Socio"));
-                    asistencia.setIdAclase(resultSet.getInt("ID_Aclase"));
+
+                    // Aquí se deben obtener los objetos Socio y Clase con los IDs correspondientes
+                    Socio socio = new Socio();
+                    socio.setIdSocio(resultSet.getInt("ID_Socio"));
+                    asistencia.setSocio(socio);
+
+                    Clase clase = new Clase();
+                    clase.setIdClase(resultSet.getInt("ID_Clase"));
+                    asistencia.setClase(clase);
+
                     asistencia.setFechaAsistencia(resultSet.getDate("Fecha_Asistencia").toLocalDate());
                     return asistencia;
                 }
@@ -95,12 +101,21 @@ public class AsistenciaData {
         try {
             String sql = "SELECT * FROM asistencia";
             PreparedStatement ps = connection.prepareStatement(sql);
+            
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Asistencia asistencia = new Asistencia();
                 asistencia.setIdAsistencia(rs.getInt("ID_Asistencia"));
-                asistencia.setIdSocio(rs.getInt("ID_Socio"));
-                asistencia.setIdAclase(rs.getInt("ID_Aclase"));
+
+                // Aquí se deben obtener los objetos Socio y Clase con los IDs correspondientes
+                Socio socio = new Socio();
+                socio.setIdSocio(rs.getInt("ID_Socio"));
+                asistencia.setSocio(socio);
+
+                Clase clase = new Clase();
+                clase.setIdClase(rs.getInt("ID_Clase"));
+                asistencia.setClase(clase);
+
                 asistencia.setFechaAsistencia(rs.getDate("Fecha_Asistencia").toLocalDate());
                 asistencias.add(asistencia);
             }
@@ -111,3 +126,6 @@ public class AsistenciaData {
         return asistencias;
     }
 }
+
+
+

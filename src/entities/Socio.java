@@ -12,6 +12,16 @@ private boolean estado;
 
 public Socio(){}
 
+    public Socio(String dniSocio, String nombreSocio, String apellidoSocio, int edadSocio, String correoSocio, String telefonoSocio, boolean estado) {
+        this.dniSocio = dniSocio;
+        this.nombreSocio = nombreSocio;
+        this.apellidoSocio = apellidoSocio;
+        this.edadSocio = edadSocio;
+        this.correoSocio = correoSocio;
+        this.telefonoSocio = telefonoSocio;
+        this.estado = estado;
+    }
+
     public Socio(int idSocio, String dniSocio, String nombreSocio, String apellidoSocio, int edadSocio, String correoSocio, String telefonoSocio, boolean estado) {
         this.idSocio = idSocio;
         this.dniSocio = dniSocio;
