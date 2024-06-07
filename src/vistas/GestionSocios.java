@@ -9,12 +9,12 @@ package vistas;
  *
  * @author carba
  */
-public class Socios extends javax.swing.JInternalFrame {
+public class GestionSocios extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Socios
      */
-    public Socios() {
+    public GestionSocios() {
         initComponents();
     }
 

@@ -102,7 +102,7 @@ public class Menu extends javax.swing.JFrame {
     private void jMSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSocioActionPerformed
         escritorio.removeAll();// limpia las ventanas
         escritorio.repaint();// se redibuja el escritorio
-        Socios gav = new Socios();// se crea una instancia de la ventana, y por defecto es invisble
+        GestionSocios gav = new GestionSocios();// se crea una instancia de la ventana, y por defecto es invisble
         gav.setVisible(true);// colocamos que sea visible  
         gav.setLocation(10, 10);
         escritorio.add(gav);//agrego al escritorio la ventana 
@@ -116,7 +116,7 @@ public class Menu extends javax.swing.JFrame {
     private void jMEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEntrenadorActionPerformed
         escritorio.removeAll();// limpia las ventanas
         escritorio.repaint();// se redibuja el escritorio
-        Entrenador gav = new Entrenador();// se crea una instancia de la ventana, y por defecto es invisble
+        GestionEntrenador gav = new GestionEntrenador();// se crea una instancia de la ventana, y por defecto es invisble
         gav.setVisible(true);// colocamos que sea visible  
         gav.setLocation(10, 10);
         escritorio.add(gav);//agrego al escritorio la ventana 

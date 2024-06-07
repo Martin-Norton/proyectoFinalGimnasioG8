@@ -9,12 +9,12 @@ package vistas;
  *
  * @author carba
  */
-public class Entrenador extends javax.swing.JInternalFrame {
+public class GestionEntrenador extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Entrenador
      */
-    public Entrenador() {
+    public GestionEntrenador() {
         initComponents();
     }
 

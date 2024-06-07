@@ -66,6 +66,21 @@ public class Pruebas {
         System.out.println(mem.listarMembresia(soci));
 
     }
-    
+    //---------------Crear Socio----------------------
+//        SocioData socioData = new SocioData();
+//        Socio socio = new Socio("2511115678", "Daniel", "Perez", 20, "1o553ocio@gmail.com", "0675621", true);
+//        socioData.agregarSocio(socio);
+//        Socio socio = new Socio(6, "252005678", "Daniel", "Lopez", 45, "1orr3eo11Socio@gmail.com", "0675621", true);
+//        socioData.actualizarSocio(socio);
+//
+//--------------buscar socio por id_socio---------
+//        System.out.println(socioData.buscarSocio(1));
+//
+//--------------listar todos los socios-------------
+//        System.out.println("lista de todos los socios del gim");
+//        System.out.println(socioData.listarSocios());
+//---------------eliminar socio---------------------
+//           socioData.eliminarSocio(1);
+
     
 }
