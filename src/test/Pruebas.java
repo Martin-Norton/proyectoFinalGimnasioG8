@@ -57,14 +57,15 @@ public class Pruebas {
     SocioData socio = new SocioData();
     Socio soci= socio.buscarSocio(1);
     
-    Membresia membresia1= new Membresia(1,soci,LocalDate.of( 2024,5,20), LocalDate.of( 2024,6,20) , 20, 200, 1);
+//    Membresia membresia1= new Membresia(1,soci,LocalDate.of( 2024,5,20), LocalDate.of( 2024,6,20) , 20, 200, 1);
     MembresiaData mem =new MembresiaData();
-    
-    mem.agregarMembresia(membresia1);
+//    
+//    mem.agregarMembresia(membresia1);
     
         System.out.println("la lista de membresia es");
         System.out.println(mem.listarMembresia(soci));
-
+        Membresia membresia2= new Membresia(5,soci,LocalDate.of( 2024,6,20), LocalDate.of( 2024,7,20) , 15, 100, 0);  
+        mem.actualizarMembresia(membresia2);
     }
     
     

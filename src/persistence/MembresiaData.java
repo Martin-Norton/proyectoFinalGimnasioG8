@@ -6,6 +6,7 @@
 package persistence;
 
 
+import entities.Clase;
 import entities.Membresia;
 import entities.Socio;
 import java.sql.*;
@@ -54,30 +55,49 @@ public class MembresiaData {
         }
     }
      public List<Membresia> listarMembresia(Socio socio){
-         List<Membresia> membresia = new ArrayList<>();
+         List<Membresia> membresias = new ArrayList<>();
          String sql = "SELECT * FROM membresias";
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)){
             while (rs.next()) {
                 Membresia i = new Membresia();
                 
                  
-                i.setIdMembresia(rs.getInt("idMembresia"));
-                i.setCantPases(rs.getInt("CantPases"));
-                
-                i.setSocio(rs.getInt(socio.getIdSocio()));
+                i.setIdMembresia(rs.getInt("id_Membresia"));
+                i.setCantPases(rs.getInt("CantidadPases"));
+                i.setSocio(socio);
                 i.setFechaInicio(rs.getDate("Fecha_Inicio").toLocalDate());
+                i.setFechaFin(rs.getDate("Fecha_Fin").toLocalDate());
                 i.setCosto(rs.getDouble("Costo"));
                 i.setEstado(rs.getInt("Estado"));
                 
-                membresia.add(i);
+                membresias.add(i);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripciones: " + ex.getMessage());
         }
-        return membresia;
+        return membresias;
         
      }
-     
+      public void actualizarMembresia(Membresia membresia) {
+        String query = "UPDATE membresias SET CantidadPases=?,Fecha_Inicio=?,Fecha_Fin=?,Costo=?,Estado=? WHERE Id_Membresia LIKE ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            
+            ps.setInt(1, membresia.getCantPases());
+            ps.setDate(2,java.sql.Date.valueOf(membresia.getFechaInicio()));
+            ps.setDate(3,java.sql.Date.valueOf(membresia.getFechaFin()));
+            ps.setDouble(4, membresia.getCosto());
+            ps.setInt(5, membresia.getEstado());
+            ps.setInt(6, membresia.getIdMembresia());
+            int filasAfectadas = ps.executeUpdate();
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Membresia actualizada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al actualizar la Membresia.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
      
 
 }
