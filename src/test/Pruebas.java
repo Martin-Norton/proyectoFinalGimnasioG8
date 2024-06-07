@@ -66,6 +66,7 @@ public class Pruebas {
         System.out.println(mem.listarMembresia(soci));
         Membresia membresia2= new Membresia(5,soci,LocalDate.of( 2024,6,20), LocalDate.of( 2024,7,20) , 15, 100, 0);  
         mem.actualizarMembresia(membresia2);
+        mem.borrarMembresia(6);
     }
     //---------------Crear Socio----------------------
 //        SocioData socioData = new SocioData();
