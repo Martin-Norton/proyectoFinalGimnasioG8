@@ -68,4 +68,12 @@ public class Entrenador {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return "Entrenador{" + "idEntrenador=" + idEntrenador + ", nombreEntrenador=" + nombreEntrenador + ", apellidoEntrenador=" + apellidoEntrenador + ", dniEntrenador=" + dniEntrenador + ", especialidad=" + especialidad + ", estado=" + estado + '}';
+    }
+
+    
+    
+    
 }
