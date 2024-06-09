@@ -32,7 +32,7 @@ public class Menu extends javax.swing.JFrame {
         jMCargaDatos = new javax.swing.JMenu();
         jMSocio = new javax.swing.JMenuItem();
         jMEntrenador = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMGestion = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,7 +48,7 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 392, Short.MAX_VALUE)
         );
 
-        jMCargaDatos.setText("Carga Datos");
+        jMCargaDatos.setText("Gestion Datos");
 
         jMSocio.setText("Socio");
         jMSocio.addActionListener(new java.awt.event.ActionListener() {
@@ -68,8 +68,8 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMCargaDatos);
 
-        jMenu2.setText("Consultas");
-        jMenuBar1.add(jMenu2);
+        jMGestion.setText("Consultas");
+        jMenuBar1.add(jMGestion);
 
         jMenu3.setText("Salir");
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -149,6 +149,7 @@ public class Menu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -162,8 +163,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMCargaDatos;
     private javax.swing.JMenuItem jMEntrenador;
+    private javax.swing.JMenu jMGestion;
     private javax.swing.JMenuItem jMSocio;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables

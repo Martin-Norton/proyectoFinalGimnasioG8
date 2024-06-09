@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMCargaDatos">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Carga Datos"/>
+            <Property name="text" type="java.lang.String" value="Gestion Datos"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMSocio">
@@ -27,7 +27,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jMGestion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consultas"/>
           </Properties>
