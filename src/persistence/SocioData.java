@@ -201,5 +201,36 @@ public class SocioData {
         return socio;
     }
 
+public Socio buscarSocioPorDni(int dni) {
+//SELECT `Id_Socio`, `DNI`, `Nombre`, `Apellido`, `Edad`, `Correo`, `Telefono`, `estado` 
+        Socio socio = null;
+        String sql = "SELECT dni, Nombre, Apellido, Edad, Correo, Telefono, estado FROM socios WHERE dni = ? AND estado = 1";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+
+            ResultSet rs = ps.executeQuery();//consulta
+
+            if (rs.next()) {
+                socio = new Socio();
+                socio.setIdSocio(dni);
+                socio.setNombreSocio(rs.getString("nombre"));
+                socio.setApellidoSocio(rs.getString("apellido"));
+                socio.setEdadSocio(rs.getInt("edad"));
+                socio.setCorreoSocio(rs.getString("correo"));
+                socio.setTelefonoSocio(rs.getString("telefono"));
+                socio.setEstado(rs.getInt("estado"));
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el socio");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socios: " + ex.getMessage());
+        }
+
+        return socio;
+    }
 
 }
