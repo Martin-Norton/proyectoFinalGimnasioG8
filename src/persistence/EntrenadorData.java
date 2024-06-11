@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class EntrenadorData {
 
@@ -25,7 +26,12 @@ public class EntrenadorData {
             ps.setString(3, entrenador.getApellidoEntrenador());
             ps.setString(4, entrenador.getEspecialidad());
             ps.setBoolean(5, entrenador.isEstado());
-            ps.executeUpdate();
+            int filasAfectadas = ps.executeUpdate();
+             if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "Clase agregada exitosamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al agregar la clase.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,7 +46,7 @@ public class EntrenadorData {
                 entrenador.setIdEntrenador(rs.getInt("Id_Entrenador"));
                 entrenador.setDniEntrenador(rs.getString("DNI"));
                 entrenador.setNombreEntrenador(rs.getString("Nombre"));
-                entrenador.setApellidoEntrenador("Apellido");
+                entrenador.setApellidoEntrenador(rs.getString("Apellido"));
                 entrenador.setEspecialidad(rs.getString("Especialidad"));
                 entrenador.setEstado(rs.getBoolean("Disponibilidad"));
 
@@ -58,6 +64,27 @@ public class EntrenadorData {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, nombre);
             ps.setString(2, apellido);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    entrenador = new Entrenador();
+                    entrenador.setIdEntrenador(rs.getInt("Id_Entrenador"));
+                    entrenador.setDniEntrenador(rs.getString("DNI"));
+                    entrenador.setNombreEntrenador(rs.getString("Nombre"));
+                    entrenador.setApellidoEntrenador("Apellido");
+                    entrenador.setEspecialidad(rs.getString("Especialidad"));
+                    entrenador.setEstado(rs.getBoolean("Disponibilidad"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entrenador;
+    }
+    public Entrenador listarEntrenadoresPorApellido(String apellido) {
+        Entrenador entrenador = null;
+        String query = "SELECT * FROM Entrenadores WHERE Apellido = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, apellido);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     entrenador = new Entrenador();

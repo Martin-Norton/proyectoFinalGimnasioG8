@@ -26,10 +26,10 @@ public class Pruebas {
         Conexion.getConexion();
 
 //Crear una clase
+//Crear una clase
 //    ClaseData clase = new ClaseData();
 //    Clase clase1 = new Clase("Boxeo", 4, LocalTime.parse("13:00:00"), 20, true);
 //    clase.agregarClase(clase1);
-//    
 // Crear una asistencia    
 //    Socio socio1 = new Socio("135465", "Felipe", "Juarez", 30, "hab@yopmail.com", "3471688", true);
 //        SocioData socioData = new SocioData();
@@ -72,12 +72,16 @@ public class Pruebas {
 //--------------listar todos los socios-------------
 //        System.out.println("lista de todos los socios del gim");
 //        System.out.println(socioData.listarSocios());
-
+//    ClaseData clase = new ClaseData();
+//    Clase clase1 = new Clase("Pilates", 4, LocalTime.parse("13:00:00"), 20, true);
+//    clase.agregarClase(clase1);
+//Crear un entrenador
+        EntrenadorData ed = new EntrenadorData();
+//        Entrenador entrenador1 = new Entrenador("Martin", "Norton", "42508965", "preparacion fisica", true);
+//        ed.agregarEntrenador(entrenador1);
 
 //---------------eliminar socio---------------------
 //           socioData.eliminarSocio(1);
-
-
 //---------------Crear una clase--------------------
 // Crear un entrenador de prueba
 //        Entrenador entrenador = new Entrenador();
@@ -90,45 +94,32 @@ public class Pruebas {
 //        nuevaClase.setCapacidad(20);
 //        nuevaClase.setEstado(true);
 //        clase.agregarClase(nuevaClase);
-
 //-------------Listar todas las clases-------------- 
 //        System.out.println(clase.listarClases());
-
-
 //------------Listar clase por ID-------------------
 //System.out.println(clase.listarClasesPorId(6));
-
-
 //------------Actualizar clase----------------------
 //        Clase claseParaActualizar = clase.listarClasesPorId(8);
 //        claseParaActualizar.setNombreClase("Esferopilates");
 //        clase.actualizarClase(claseParaActualizar);
-
 //------------Buscar clase por Nombre---------------
 //
 // List<Clase> clasesPorNombre = clase.buscarPorNombre("Yoga");
 //        System.out.println(clasesPorNombre);      
-      
 //------------Buscar clase por Entrendor------------
 //List<Clase> clasesPorEntrenador = clase.buscarPorEntrenador(4);
 //            System.out.println("Clases encontradas por entrenador:");
 //            for (Clase c : clasesPorEntrenador) {
 //                System.out.println(c.getNombreClase());
 //            }
- 
 //------------Buscar Clase por Horario--------------
 // List<Clase> clasesPorHorario = clase.buscarPorHorario(LocalTime.of(9, 0));
 //        System.out.println("Clases encontradas por horario:");
 //        for (Clase c : clasesPorHorario) {
 //            System.out.println(c.getNombreClase());
 //        }
-
 //-----------Borrar clase--------------------------
 //clase.borrarClase(16);
-        
-        
-        
-        
     }
 
 }

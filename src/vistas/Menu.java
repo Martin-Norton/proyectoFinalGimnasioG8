@@ -32,6 +32,7 @@ public class Menu extends javax.swing.JFrame {
         jMCargaDatos = new javax.swing.JMenu();
         jMSocio = new javax.swing.JMenuItem();
         jMEntrenador = new javax.swing.JMenuItem();
+        jMClase = new javax.swing.JMenuItem();
         jMGestion = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -65,6 +66,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMCargaDatos.add(jMEntrenador);
+
+        jMClase.setText("Clase");
+        jMClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMClaseActionPerformed(evt);
+            }
+        });
+        jMCargaDatos.add(jMClase);
 
         jMenuBar1.add(jMCargaDatos);
 
@@ -123,6 +132,16 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(gav);// traigo al frente la ventana    }
     }//GEN-LAST:event_jMEntrenadorActionPerformed
 
+    private void jMClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMClaseActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionClase gclase = new GestionClase();
+        gclase.setVisible(true);
+        gclase.setLocation(10, 10);
+        escritorio.add(gclase); 
+        escritorio.moveToFront(gclase);
+    }//GEN-LAST:event_jMClaseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -162,6 +181,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMCargaDatos;
+    private javax.swing.JMenuItem jMClase;
     private javax.swing.JMenuItem jMEntrenador;
     private javax.swing.JMenu jMGestion;
     private javax.swing.JMenuItem jMSocio;
