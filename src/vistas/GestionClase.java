@@ -9,8 +9,14 @@ import entities.Clase;
 import entities.Entrenador;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 import persistence.ClaseData;
 import persistence.EntrenadorData;
 
@@ -32,7 +38,6 @@ public class GestionClase extends javax.swing.JInternalFrame {
         llenarCombo();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,10 +51,10 @@ public class GestionClase extends javax.swing.JInternalFrame {
         jBGuardar = new javax.swing.JToggleButton();
         jTNombreClase = new javax.swing.JTextField();
         jCBEntrenadores = new javax.swing.JComboBox<>();
-        jTHorario = new javax.swing.JTextField();
         jTCapacidad = new javax.swing.JTextField();
         jREstadoClase = new javax.swing.JRadioButton();
         jBSalir = new javax.swing.JButton();
+        jTHorario = new javax.swing.JFormattedTextField();
 
         jLabel1.setText("DATOS DE LA CLASE");
 
@@ -84,9 +89,6 @@ public class GestionClase extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -95,20 +97,22 @@ public class GestionClase extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jREstadoClase)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTNombreClase)
-                                .addComponent(jCBEntrenadores, 0, 230, Short.MAX_VALUE)
-                                .addComponent(jTHorario)
-                                .addComponent(jTCapacidad))))
+                            .addComponent(jTNombreClase)
+                            .addComponent(jCBEntrenadores, 0, 230, Short.MAX_VALUE)
+                            .addComponent(jTCapacidad)
+                            .addComponent(jTHorario)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jBGuardar)
                         .addGap(202, 202, 202)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBSalir)
-                .addGap(104, 104, 104))
+                .addContainerGap(110, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(223, 223, 223))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +131,7 @@ public class GestionClase extends javax.swing.JInternalFrame {
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -146,17 +150,28 @@ public class GestionClase extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        String nombreClase = jTNombreClase.getText();
-        Entrenador entrenador = (Entrenador) jCBEntrenadores.getSelectedItem();
-        String horarioStr = jTHorario.getText();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime horarioClase = LocalTime.parse(horarioStr, formatter);
-        int capacidad = Integer.parseInt(jTCapacidad.getText());
-        boolean estado = jREstadoClase.isSelected();
-        Clase nuevaClase = new Clase(nombreClase, entrenador, horarioClase, capacidad, estado);
-        jBGuardar.setEnabled(true);
-        claseData.agregarClase(nuevaClase);
-        limpiarCampos();
+
+        String horarioStr = jTHorario.getText().trim();
+        if (horarioStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese el horario en el formato hh:mm");
+            return;
+        }
+        if (!horarioStr.matches("([01]?\\d|2[0-3]):[0-5]\\d")) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un horario válido en el formato hh:mm");
+            return; // Detener el proceso de guardado si el formato del horario es incorrecto
+        }
+        try {
+            LocalTime horarioClase = LocalTime.parse(horarioStr);
+            String nombreClase = jTNombreClase.getText();
+            Entrenador entrenador = (Entrenador) jCBEntrenadores.getSelectedItem();
+            int capacidad = Integer.parseInt(jTCapacidad.getText());
+            boolean estado = jREstadoClase.isSelected();
+            Clase nuevaClase = new Clase(nombreClase, entrenador, horarioClase, capacidad, estado);
+            claseData.agregarClase(nuevaClase);
+            limpiarCampos();
+        } catch (DateTimeParseException ex) {
+            JOptionPane.showMessageDialog(this, "Error al convertir el horario. Por favor, ingrese un horario válido en el formato hh:mm");
+        }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -169,9 +184,7 @@ public class GestionClase extends javax.swing.JInternalFrame {
         for (Entrenador entrenador1 : entrenadores) {
             jCBEntrenadores.addItem(entrenador1);
         }
-       // jCBEntrenadores.setSelectedIndex(0);
     }
-
     private void limpiarCampos() {
         jTNombreClase.setText("");
         jCBEntrenadores.setSelectedIndex(0);
@@ -191,7 +204,7 @@ public class GestionClase extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JRadioButton jREstadoClase;
     private javax.swing.JTextField jTCapacidad;
-    private javax.swing.JTextField jTHorario;
+    private javax.swing.JFormattedTextField jTHorario;
     private javax.swing.JTextField jTNombreClase;
     // End of variables declaration//GEN-END:variables
 }

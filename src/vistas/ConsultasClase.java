@@ -5,15 +5,23 @@
  */
 package vistas;
 
-/**
- *
- * @author Martin Norton
- */
+import entities.Clase;
+import entities.Entrenador;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import persistence.ClaseData;
+import persistence.EntrenadorData;
+
 public class ConsultasClase extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ConsultasClase
-     */
+    List<Clase> clases = new ArrayList<>();
+    ClaseData cd = new ClaseData();
+    EntrenadorData ed = new EntrenadorData();
+
     public ConsultasClase() {
         initComponents();
     }
@@ -27,21 +35,284 @@ public class ConsultasClase extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jBAllClases = new javax.swing.JButton();
+        jBPorHorario = new javax.swing.JButton();
+        jBPorEntrenador = new javax.swing.JButton();
+        jBPorNombre = new javax.swing.JButton();
+        jTNombre = new javax.swing.JTextField();
+        jTNombreClase = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jCHorario = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTClases = new javax.swing.JTable();
+        jTApellido = new javax.swing.JTextField();
+
+        jLabel1.setText("Consultas de Clases");
+
+        jBAllClases.setText("Ver todas las clases ");
+        jBAllClases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAllClasesActionPerformed(evt);
+            }
+        });
+
+        jBPorHorario.setText("Buscar por Horario");
+        jBPorHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPorHorarioActionPerformed(evt);
+            }
+        });
+
+        jBPorEntrenador.setText("Buscar por Entrenador");
+        jBPorEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPorEntrenadorActionPerformed(evt);
+            }
+        });
+
+        jBPorNombre.setText("Buscar por Nombre");
+        jBPorNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPorNombreActionPerformed(evt);
+            }
+        });
+
+        jTNombre.setText("Nombre");
+
+        jLabel2.setText("Si desea ver todas las clases presione:");
+
+        jLabel3.setText("Seleccione Horario: ");
+
+        jLabel4.setText("Ingrese nombre y apellido del Entrenador");
+
+        jLabel5.setText("Ingrese el nombre de la clase ");
+
+        jCHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08:00 a 12:00", "15:00 a 22:00" }));
+
+        jTClases.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTClases);
+
+        jTApellido.setText("Apellido");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(214, 214, 214)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTNombreClase)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jTApellido)))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jCHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jBPorNombre)
+                                    .addComponent(jBPorEntrenador)
+                                    .addComponent(jBPorHorario)
+                                    .addComponent(jBAllClases, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(45, 45, 45))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 403, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBAllClases)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBPorHorario)
+                    .addComponent(jCHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBPorEntrenador, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jBPorNombre))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jTNombreClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBPorHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPorHorarioActionPerformed
+
+        if (jCHorario.getSelectedItem().equals("08:00 a 12:00")) {
+            LocalTime horaInicio = LocalTime.of(8, 0);
+            LocalTime horaFin = LocalTime.of(12, 0);
+            clases = cd.buscarPorRangoHorario(horaInicio, horaFin);
+            String[] columnNames = {"Nombre de la clase", "Entrenador", "Horario"};
+            DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            for (Clase clase1 : clases) {
+                Vector renglon = new Vector<>();
+                renglon.add(clase1.getNombreClase());
+                renglon.add(clase1.getEntrenador().getNombreEntrenador() + ", " + clase1.getEntrenador().getApellidoEntrenador());
+                renglon.add(clase1.getHorarioClase());
+                model.addRow(renglon);
+            }
+            jTClases.setModel(model);
+        }
+        if (jCHorario.getSelectedItem().equals("15:00 a 22:00")) {
+            LocalTime horaInicio = LocalTime.of(15, 0);
+            LocalTime horaFin = LocalTime.of(22, 0);
+            clases = cd.buscarPorRangoHorario(horaInicio, horaFin);
+            String[] columnNames = {"Nombre de la clase", "Entrenador", "Horario"};
+            DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            for (Clase clase1 : clases) {
+                Vector renglon = new Vector<>();
+                renglon.add(clase1.getNombreClase());
+                renglon.add(clase1.getEntrenador().getNombreEntrenador() + ", " + clase1.getEntrenador().getApellidoEntrenador());
+                renglon.add(clase1.getHorarioClase());
+                model.addRow(renglon);
+            }
+            jTClases.setModel(model);
+        }
+
+    }//GEN-LAST:event_jBPorHorarioActionPerformed
+
+    private void jBAllClasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAllClasesActionPerformed
+        clases = cd.listarClases();
+        String[] columnNames = {"Nombre de la clase", "Entrenador", "Horario"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        for (Clase clase1 : clases) {
+            Vector renglon = new Vector<>();
+            renglon.add(clase1.getNombreClase());
+            renglon.add(clase1.getEntrenador().getNombreEntrenador() + ", " + clase1.getEntrenador().getApellidoEntrenador());
+            renglon.add(clase1.getHorarioClase());
+            model.addRow(renglon);
+        }
+        jTClases.setModel(model);
+    }//GEN-LAST:event_jBAllClasesActionPerformed
+
+    private void jBPorEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPorEntrenadorActionPerformed
+        if (jTNombre == null || jTApellido == null) {
+            JOptionPane.showMessageDialog(this, "Debe llenar ambos campos: Nombre y Apellido");
+        } else {
+            Entrenador ent = ed.listarEntrenadoresPorNombreyApellido(jTNombre.getText(), jTApellido.getText());
+            clases = cd.buscarPorEntrenador(ent.getIdEntrenador());
+            String[] columnNames = {"Nombre de la clase", "Entrenador", "Horario"};
+            DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            for (Clase clase1 : clases) {
+                Vector renglon = new Vector<>();
+                renglon.add(clase1.getNombreClase());
+                renglon.add(clase1.getEntrenador().getNombreEntrenador() + ", " + clase1.getEntrenador().getApellidoEntrenador());
+                renglon.add(clase1.getHorarioClase());
+                model.addRow(renglon);
+            }
+            jTClases.setModel(model);
+        }
+    }//GEN-LAST:event_jBPorEntrenadorActionPerformed
+
+    private void jBPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPorNombreActionPerformed
+       if (jTNombreClase == null ) {
+            JOptionPane.showMessageDialog(this, "Debe llenar el campo: Nombre de la clase");
+        } else {
+          
+            clases = cd.buscarPorNombre(jTNombreClase.getText());
+            String[] columnNames = {"Nombre de la clase", "Entrenador", "Horario"};
+            DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            for (Clase clase1 : clases) {
+                Vector renglon = new Vector<>();
+                renglon.add(clase1.getNombreClase());
+                renglon.add(clase1.getEntrenador().getNombreEntrenador() + ", " + clase1.getEntrenador().getApellidoEntrenador());
+                renglon.add(clase1.getHorarioClase());
+                model.addRow(renglon);
+            }
+            jTClases.setModel(model);
+        }
+    }//GEN-LAST:event_jBPorNombreActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAllClases;
+    private javax.swing.JButton jBPorEntrenador;
+    private javax.swing.JButton jBPorHorario;
+    private javax.swing.JButton jBPorNombre;
+    private javax.swing.JComboBox<String> jCHorario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTApellido;
+    private javax.swing.JTable jTClases;
+    private javax.swing.JTextField jTNombre;
+    private javax.swing.JTextField jTNombreClase;
     // End of variables declaration//GEN-END:variables
 }

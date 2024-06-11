@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 public class ClaseData {
 
     private Connection connection;
+    private EntrenadorData ed = new EntrenadorData();
 
     public ClaseData() {
         connection = Conexion.getConexion();
@@ -42,9 +43,7 @@ public class ClaseData {
                 Clase clase = new Clase();
                 clase.setIdClase(rs.getInt("Id_Clase"));
                 clase.setNombreClase(rs.getString("Nombre"));
-                Entrenador entrenador = new Entrenador();
-                entrenador.setIdEntrenador(rs.getInt("Id_Entrenador"));
-                clase.setEntrenador(entrenador);
+                clase.setEntrenador(ed.buscarPorId(rs.getInt("Id_Entrenador")));
                 clase.setHorarioClase(rs.getTime("Horario").toLocalTime());
                 clase.setCapacidad(rs.getInt("Capacidad"));
                 clase.setEstado(rs.getBoolean("Estado"));
@@ -111,8 +110,7 @@ public class ClaseData {
                     Clase clase = new Clase();
                     clase.setIdClase(rs.getInt("Id_Clase"));
                     clase.setNombreClase(rs.getString("Nombre"));
-                    Entrenador entrenador = new Entrenador(); // Aquí deberías cargar el entrenador desde la base de datos
-                    clase.setEntrenador(entrenador);
+                    clase.setEntrenador(ed.buscarPorId(rs.getInt("Id_Entrenador")));
                     clase.setHorarioClase(rs.getTime("Horario").toLocalTime());
                     clase.setCapacidad(rs.getInt("Capacidad"));
                     clase.setEstado(rs.getBoolean("Estado"));
@@ -135,8 +133,7 @@ public class ClaseData {
                     Clase clase = new Clase();
                     clase.setIdClase(rs.getInt("Id_Clase"));
                     clase.setNombreClase(rs.getString("Nombre"));
-                    Entrenador entrenador = new Entrenador(); // Aquí deberías cargar el entrenador desde la base de datos
-                    clase.setEntrenador(entrenador);
+                    clase.setEntrenador(ed.buscarPorId(rs.getInt("Id_Entrenador")));
                     clase.setHorarioClase(rs.getTime("Horario").toLocalTime());
                     clase.setCapacidad(rs.getInt("Capacidad"));
                     clase.setEstado(rs.getBoolean("Estado"));
@@ -159,8 +156,33 @@ public class ClaseData {
                     Clase clase = new Clase();
                     clase.setIdClase(rs.getInt("Id_Clase"));
                     clase.setNombreClase(rs.getString("Nombre"));
-                    Entrenador entrenador = new Entrenador(); // Aquí deberías cargar el entrenador desde la base de datos
-                    clase.setEntrenador(entrenador);
+                    clase.setEntrenador(ed.buscarPorId(rs.getInt("Id_Entrenador")));
+                    clase.setHorarioClase(rs.getTime("Horario").toLocalTime());
+                    clase.setCapacidad(rs.getInt("Capacidad"));
+                    clase.setEstado(rs.getBoolean("Estado"));
+                    clases.add(clase);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clases;
+    }
+
+    public List<Clase> buscarPorRangoHorario(LocalTime horaInicio, LocalTime horaFin) {
+        List<Clase> clases = new ArrayList<>();
+        String query = "SELECT * FROM clases WHERE Horario BETWEEN ? AND ?";
+        
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setTime(1, Time.valueOf(horaInicio));
+            pstmt.setTime(2, Time.valueOf(horaFin));
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Clase clase = new Clase();
+                    clase.setIdClase(rs.getInt("Id_Clase"));
+                    clase.setNombreClase(rs.getString("Nombre"));
+                    clase.setEntrenador(ed.buscarPorId(rs.getInt("Id_Entrenador")));
                     clase.setHorarioClase(rs.getTime("Horario").toLocalTime());
                     clase.setCapacidad(rs.getInt("Capacidad"));
                     clase.setEstado(rs.getBoolean("Estado"));

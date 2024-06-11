@@ -34,6 +34,7 @@ public class Menu extends javax.swing.JFrame {
         jMEntrenador = new javax.swing.JMenuItem();
         jMClase = new javax.swing.JMenuItem();
         jMGestion = new javax.swing.JMenu();
+        jMConsultasClase = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,11 +43,11 @@ public class Menu extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGap(0, 1022, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 392, Short.MAX_VALUE)
+            .addGap(0, 734, Short.MAX_VALUE)
         );
 
         jMCargaDatos.setText("Gestion Datos");
@@ -78,6 +79,15 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1.add(jMCargaDatos);
 
         jMGestion.setText("Consultas");
+
+        jMConsultasClase.setText("Consultas de clases");
+        jMConsultasClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMConsultasClaseActionPerformed(evt);
+            }
+        });
+        jMGestion.add(jMConsultasClase);
+
         jMenuBar1.add(jMGestion);
 
         jMenu3.setText("Salir");
@@ -95,14 +105,14 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(escritorio)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(escritorio)
+                .addContainerGap())
         );
 
         pack();
@@ -141,6 +151,16 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(gclase); 
         escritorio.moveToFront(gclase);
     }//GEN-LAST:event_jMClaseActionPerformed
+
+    private void jMConsultasClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMConsultasClaseActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ConsultasClase consClase = new ConsultasClase();
+         consClase.setVisible(true);
+         consClase.setLocation(10, 10);
+        escritorio.add( consClase); 
+        escritorio.moveToFront( consClase);
+    }//GEN-LAST:event_jMConsultasClaseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,6 +202,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenu jMCargaDatos;
     private javax.swing.JMenuItem jMClase;
+    private javax.swing.JMenuItem jMConsultasClase;
     private javax.swing.JMenuItem jMEntrenador;
     private javax.swing.JMenu jMGestion;
     private javax.swing.JMenuItem jMSocio;
