@@ -101,13 +101,8 @@ private boolean estado;
 
     @Override
     public String toString() {
-        return "Clase{" + "idClase=" + idClase 
-                + ", nombreClase=" + nombreClase 
-                + ", entrenador=" + entrenador
-                + ", horarioClase=" + horarioClase 
-                + ", capacidad=" + capacidad 
-                + ", estado=" + estado 
-                + '}';
+        return nombreClase ;
+                
     }
     
     

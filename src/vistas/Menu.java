@@ -33,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
         jMSocio = new javax.swing.JMenuItem();
         jMEntrenador = new javax.swing.JMenuItem();
         jMClase = new javax.swing.JMenuItem();
+        jMAsistencia = new javax.swing.JMenuItem();
         jMGestion = new javax.swing.JMenu();
         jMConsultasClase = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -75,6 +76,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMCargaDatos.add(jMClase);
+
+        jMAsistencia.setText("Asistencia");
+        jMAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMAsistenciaActionPerformed(evt);
+            }
+        });
+        jMCargaDatos.add(jMAsistencia);
 
         jMenuBar1.add(jMCargaDatos);
 
@@ -129,7 +138,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMSocioActionPerformed
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-         System.exit(0);         
+        System.exit(0);
     }//GEN-LAST:event_jMenu3MouseClicked
 
     private void jMEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEntrenadorActionPerformed
@@ -148,7 +157,7 @@ public class Menu extends javax.swing.JFrame {
         GestionClase gclase = new GestionClase();
         gclase.setVisible(true);
         gclase.setLocation(10, 10);
-        escritorio.add(gclase); 
+        escritorio.add(gclase);
         escritorio.moveToFront(gclase);
     }//GEN-LAST:event_jMClaseActionPerformed
 
@@ -156,11 +165,21 @@ public class Menu extends javax.swing.JFrame {
         escritorio.removeAll();
         escritorio.repaint();
         ConsultasClase consClase = new ConsultasClase();
-         consClase.setVisible(true);
-         consClase.setLocation(10, 10);
-        escritorio.add( consClase); 
-        escritorio.moveToFront( consClase);
+        consClase.setVisible(true);
+        consClase.setLocation(10, 10);
+        escritorio.add(consClase);
+        escritorio.moveToFront(consClase);
     }//GEN-LAST:event_jMConsultasClaseActionPerformed
+
+    private void jMAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAsistenciaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionAsistencia gAs = new GestionAsistencia();
+        gAs.setVisible(true);
+        gAs.setLocation(10, 10);
+        escritorio.add(gAs);
+        escritorio.moveToFront(gAs);
+    }//GEN-LAST:event_jMAsistenciaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,6 +219,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jMAsistencia;
     private javax.swing.JMenu jMCargaDatos;
     private javax.swing.JMenuItem jMClase;
     private javax.swing.JMenuItem jMConsultasClase;

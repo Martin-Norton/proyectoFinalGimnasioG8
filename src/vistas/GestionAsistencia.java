@@ -1,6 +1,7 @@
 package vistas;
 import entities.Clase;
 import entities.Socio;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +14,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
     private ClaseData claseData = new ClaseData();
     private AsistenciaData asistenciaDAta = new AsistenciaData();
     private Socio socio = new Socio();
+    private List<Clase> clases = new ArrayList<>();
      private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int i, int i1) {
@@ -22,6 +24,8 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
 
     public GestionAsistencia() {
         initComponents();
+        this.clases = claseData.listarClases();
+        llenarCombo();
     }
 
   
@@ -58,6 +62,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextFieldNombreApellido.setEditable(false);
         jTextFieldNombreApellido.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextFieldNombreApellido.setText("   Nombre y Apellido");
 
@@ -65,7 +70,6 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
         jLabel1.setText("Clase");
 
         jComboBoxClase.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBoxClase.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Horario");
@@ -75,13 +79,13 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
 
         jTableInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Id Clase", "Entrenador", "Capacidad"
+
             }
         ));
         jScrollPane1.setViewportView(jTableInfo);
@@ -99,13 +103,6 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
                 .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jLabelDNI)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButtonBuscar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(121, 121, 121)
@@ -120,12 +117,19 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
                             .addGap(149, 149, 149)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(172, 172, 172)
-                        .addComponent(jTextFieldNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(179, 179, 179)
-                        .addComponent(jLabel5)))
-                .addContainerGap(87, Short.MAX_VALUE))
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(jLabelDNI)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNombreApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextFieldDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(jButtonBuscar)))))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +174,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
             Socio socio = socioData.buscarSocioPorDni(dni);
             if (socio != null) {
                 jTextFieldDniSocio.setText(socio.getNombreSocio());
-                llenarComboBoxClases(socio.getIdSocio());
+                llenarComboBoxClases();
             } else {
                 JOptionPane.showMessageDialog(this, "Socio no encontrado.");
             }
@@ -180,10 +184,10 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
         }
     }
 
-    private void llenarComboBoxClases(int idSocio) {
+    private void llenarComboBoxClases() {
        jComboBoxClase.removeAllItems();
         try {
-            List<Clase> clases = claseData.buscarClasesPorSocio(idSocio);
+           // List<Clase> clases = claseData.buscarClasesPorSocio(idSocio);
             for (Clase clase : clases) {
                 jComboBoxClase.addItem(clase);
             }
@@ -200,6 +204,14 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
         jComboBoxHorario.removeAllItems();
         jComboBoxHorario.addItem(clase.getHorarioClase().toString());
     }
+    private void llenarCombo() {
+        if (clases.isEmpty()) {
+            System.out.println("lista de clases vacia ");
+        }
+        for (Clase clase1 : clases) {
+            jComboBoxClase.addItem(clase1);
+        }
+    }
 
     private void llenarTabla() { // FALTA EL MÉTODO DE ARMAR CABECERA Y LLENAR TABLA
     
@@ -210,6 +222,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
 
         }
     }
+   
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
