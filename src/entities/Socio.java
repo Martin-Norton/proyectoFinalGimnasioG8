@@ -8,21 +8,11 @@ private String apellidoSocio;
 private int edadSocio;
 private String correoSocio;
 private String telefonoSocio;
-private boolean estado;
+private int estado;
 
 public Socio(){}
 
-    public Socio(String dniSocio, String nombreSocio, String apellidoSocio, int edadSocio, String correoSocio, String telefonoSocio, boolean estado) {
-        this.dniSocio = dniSocio;
-        this.nombreSocio = nombreSocio;
-        this.apellidoSocio = apellidoSocio;
-        this.edadSocio = edadSocio;
-        this.correoSocio = correoSocio;
-        this.telefonoSocio = telefonoSocio;
-        this.estado = estado;
-    }
-
-    public Socio(int idSocio, String dniSocio, String nombreSocio, String apellidoSocio, int edadSocio, String correoSocio, String telefonoSocio, boolean estado) {
+    public Socio(int idSocio, String dniSocio, String nombreSocio, String apellidoSocio, int edadSocio, String correoSocio, String telefonoSocio, int estado) {
         this.idSocio = idSocio;
         this.dniSocio = dniSocio;
         this.nombreSocio = nombreSocio;
@@ -32,6 +22,20 @@ public Socio(){}
         this.telefonoSocio = telefonoSocio;
         this.estado = estado;
     }
+
+    public Socio(String dniSocio, String nombreSocio, String apellidoSocio, int edadSocio, String correoSocio, String telefonoSocio, int estado) {
+        this.dniSocio = dniSocio;
+        this.nombreSocio = nombreSocio;
+        this.apellidoSocio = apellidoSocio;
+        this.edadSocio = edadSocio;
+        this.correoSocio = correoSocio;
+        this.telefonoSocio = telefonoSocio;
+        this.estado = estado;
+    }
+
+
+
+
 
     public int getIdSocio() {
         return idSocio;
@@ -89,12 +93,14 @@ public Socio(){}
         this.telefonoSocio = telefonoSocio;
     }
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
+
+  
 
 }
