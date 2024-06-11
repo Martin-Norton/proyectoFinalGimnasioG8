@@ -1,5 +1,4 @@
 package persistence;
-
 import entities.Clase;
 import entities.Entrenador;
 import java.sql.*;
@@ -209,4 +208,36 @@ public class ClaseData {
             e.printStackTrace();
         }
     }
+    
+    public List<Clase> buscarClasesPorSocio(int idSocio) {
+        List<Clase> clases = new ArrayList<>();
+        String query = "SELECT c.* FROM clases c "
+                     + "INNER JOIN clases_socios cs ON c.Id_Clase = cs.Id_Clase "
+                     + "WHERE cs.Id_Socio = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, idSocio);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    Clase clase = new Clase();
+                    clase.setIdClase(rs.getInt("Id_Clase"));
+                    clase.setNombreClase(rs.getString("Nombre"));
+                    
+                    Entrenador entrenador = new Entrenador();
+                    entrenador.setIdEntrenador(rs.getInt("Id_Entrenador"));
+                    clase.setEntrenador(entrenador);
+                    
+                    clase.setHorarioClase(rs.getTime("Horario").toLocalTime());
+                    clase.setCapacidad(rs.getInt("Capacidad"));
+                    clase.setEstado(rs.getBoolean("Estado"));
+                    
+                    clases.add(clase);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clases;
+    }
+    
+    
 }

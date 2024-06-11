@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package persistence;
 
 import entities.Socio;
@@ -11,10 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author carba
- */
 public class SocioData {
 
     private Connection con = null;
@@ -201,20 +193,20 @@ public class SocioData {
         return socio;
     }
 
-public Socio buscarSocioPorDni(int dni) {
+public Socio buscarSocioPorDni(String dni) {
 //SELECT `Id_Socio`, `DNI`, `Nombre`, `Apellido`, `Edad`, `Correo`, `Telefono`, `estado` 
         Socio socio = null;
         String sql = "SELECT dni, Nombre, Apellido, Edad, Correo, Telefono, estado FROM socios WHERE dni = ? AND estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, dni);
+            ps.setString(1, dni);
 
             ResultSet rs = ps.executeQuery();//consulta
 
             if (rs.next()) {
                 socio = new Socio();
-                socio.setIdSocio(dni);
+                socio.setDniSocio(dni);
                 socio.setNombreSocio(rs.getString("nombre"));
                 socio.setApellidoSocio(rs.getString("apellido"));
                 socio.setEdadSocio(rs.getInt("edad"));
