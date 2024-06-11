@@ -70,7 +70,7 @@ public class EntrenadorData {
                     entrenador.setIdEntrenador(rs.getInt("Id_Entrenador"));
                     entrenador.setDniEntrenador(rs.getString("DNI"));
                     entrenador.setNombreEntrenador(rs.getString("Nombre"));
-                    entrenador.setApellidoEntrenador("Apellido");
+                    entrenador.setApellidoEntrenador(rs.getString("Apellido"));
                     entrenador.setEspecialidad(rs.getString("Especialidad"));
                     entrenador.setEstado(rs.getBoolean("Disponibilidad"));
                 }
@@ -91,7 +91,29 @@ public class EntrenadorData {
                     entrenador.setIdEntrenador(rs.getInt("Id_Entrenador"));
                     entrenador.setDniEntrenador(rs.getString("DNI"));
                     entrenador.setNombreEntrenador(rs.getString("Nombre"));
-                    entrenador.setApellidoEntrenador("Apellido");
+                    entrenador.setApellidoEntrenador(rs.getString("Apellido"));
+                    entrenador.setEspecialidad(rs.getString("Especialidad"));
+                    entrenador.setEstado(rs.getBoolean("Disponibilidad"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return entrenador;
+    }
+    
+    public Entrenador buscarPorId(int id){
+        Entrenador entrenador = null;
+        String query = "SELECT * FROM Entrenadores WHERE Id_Entrenador = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    entrenador = new Entrenador();
+                    entrenador.setIdEntrenador(rs.getInt("Id_Entrenador"));
+                    entrenador.setDniEntrenador(rs.getString("DNI"));
+                    entrenador.setNombreEntrenador(rs.getString("Nombre"));
+                    entrenador.setApellidoEntrenador(rs.getString("Apellido"));
                     entrenador.setEspecialidad(rs.getString("Especialidad"));
                     entrenador.setEstado(rs.getBoolean("Disponibilidad"));
                 }
@@ -111,7 +133,7 @@ public class EntrenadorData {
                 entrenador.setIdEntrenador(rs.getInt("Id_Entrenador"));
                 entrenador.setDniEntrenador(rs.getString("DNI"));
                 entrenador.setNombreEntrenador(rs.getString("Nombre"));
-                entrenador.setApellidoEntrenador("Apellido");
+                entrenador.setApellidoEntrenador(rs.getString("Apellido"));
                 entrenador.setEspecialidad(rs.getString("Especialidad"));
                 entrenador.setEstado(rs.getBoolean("Disponibilidad"));
 

@@ -101,6 +101,5 @@ public Socio(){}
         this.estado = estado;
     }
 
-  
 
 }

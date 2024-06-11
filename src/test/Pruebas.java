@@ -27,7 +27,11 @@ public class Pruebas {
 
 //Crear una clase
 //Crear una clase
-//    ClaseData clase = new ClaseData();
+    ClaseData clase = new ClaseData();
+     LocalTime horaInicio = LocalTime.of(8, 0);
+     LocalTime horaFin = LocalTime.of(12, 0);
+     clase.buscarPorRangoHorario(horaInicio, horaFin);
+
 //    Clase clase1 = new Clase("Boxeo", 4, LocalTime.parse("13:00:00"), 20, true);
 //    clase.agregarClase(clase1);
 // Crear una asistencia    
