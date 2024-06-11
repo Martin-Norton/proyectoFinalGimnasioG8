@@ -32,8 +32,8 @@ public class SocioData {
             ps.setInt(4, socio.getEdadSocio());
             ps.setString(5, socio.getCorreoSocio());
             ps.setString(6, socio.getTelefonoSocio());
-            ps.setBoolean(7, socio.isEstado());
-            
+            ps.setInt(7, socio.getEstado());
+
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -49,6 +49,7 @@ public class SocioData {
             e.printStackTrace();
         }
     }
+// lista todos los socios
 
     public List<Socio> listarSocios() {
         List<Socio> socios = new ArrayList<>();
@@ -62,7 +63,7 @@ public class SocioData {
                 socio.setEdadSocio(rs.getInt("edad"));
                 socio.setCorreoSocio(rs.getString("correo"));
                 socio.setTelefonoSocio(rs.getString("telefono"));
-                socio.setEstado(rs.getBoolean("Estado"));
+                socio.setEstado(rs.getInt("Estado"));
                 socios.add(socio);
             }
         } catch (SQLException e) {
@@ -71,7 +72,9 @@ public class SocioData {
         }
         return socios;
     }
-    public void eliminarSocio(int id) {
+
+    //elimina socio pos id
+    public void eliminarSocioPorId(int id) {
         try {
             String sql = "UPDATE socios SET estado = 0 WHERE id_socio = ?";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -85,6 +88,8 @@ public class SocioData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socios: " + e.getMessage());
         }
     }
+
+    //lista socios por id
     public Socio listarSociosPorId(int id) {
         Socio socio = null;
         String query = "SELECT * FROM Clases WHERE Id_Clase = ?";
@@ -100,8 +105,33 @@ public class SocioData {
                     socio.setEdadSocio(rs.getInt("edad"));
                     socio.setCorreoSocio(rs.getString("correo"));
                     socio.setTelefonoSocio(rs.getString("telefono"));
-                    socio.setEstado(rs.getBoolean("Estado"));
+                    socio.setEstado(rs.getInt("Estado"));
 
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return socio;
+    }
+
+    public Socio listarSociosPorNombreyApellido(String nombre, String apellido) {
+        Socio socio = null;
+        String query = "SELECT * FROM socios WHERE Nombre = ? AND Apellido = ?";
+        try (PreparedStatement ps = con.prepareStatement(query)) {
+            ps.setString(1, nombre);
+            ps.setString(2, apellido);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    socio = new Socio();
+                    socio.setIdSocio(rs.getInt("Id_Socio"));
+                    socio.setDniSocio(rs.getString("dni"));
+                    socio.setNombreSocio(rs.getString("nombre"));
+                    socio.setApellidoSocio(rs.getString("apellido"));
+                    socio.setEdadSocio(rs.getInt("edad"));
+                    socio.setCorreoSocio(rs.getString("correo"));
+                    socio.setTelefonoSocio(rs.getString("telefono"));
+                    socio.setEstado(rs.getInt("Estado"));
                 }
             }
         } catch (SQLException e) {
@@ -123,7 +153,7 @@ public class SocioData {
             ps.setInt(4, socio.getEdadSocio());
             ps.setString(5, socio.getCorreoSocio());
             ps.setString(6, socio.getTelefonoSocio());
-            ps.setBoolean(7, socio.isEstado());
+            ps.setInt(7, socio.getIdSocio());
             ps.setInt(8, socio.getIdSocio());
             ps.executeUpdate();
             int exito = ps.executeUpdate();
@@ -136,6 +166,7 @@ public class SocioData {
             e.printStackTrace();
         }
     }
+// busca socio por id
 
     public Socio buscarSocio(int id) {
 //SELECT `Id_Socio`, `DNI`, `Nombre`, `Apellido`, `Edad`, `Correo`, `Telefono`, `estado` 
@@ -157,10 +188,7 @@ public class SocioData {
                 socio.setEdadSocio(rs.getInt("edad"));
                 socio.setCorreoSocio(rs.getString("correo"));
                 socio.setTelefonoSocio(rs.getString("telefono"));
-
-                socio.setEstado(true);
-
-                
+                socio.setEstado(rs.getInt("estado"));
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el socio");
@@ -172,4 +200,6 @@ public class SocioData {
 
         return socio;
     }
+
+
 }
