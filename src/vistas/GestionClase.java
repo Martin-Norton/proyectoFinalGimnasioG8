@@ -148,23 +148,42 @@ public class GestionClase extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-
-        String horarioStr = jTHorario.getText().trim();
-        if (horarioStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese el horario en el formato hh:mm");
-            return;
-        }
-        if (!horarioStr.matches("([01]?\\d|2[0-3]):[0-5]\\d")) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese un horario válido en el formato hh:mm");
-            return; // Detener el proceso de guardado si el formato del horario es incorrecto
-        }
+   private boolean validaEntero(String texto) {
         try {
+            if (!texto.matches("^\\d+$")) {
+// no es un numero entero
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error: " + e.getMessage());
+            return false;
+        }
+    }
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        try {
+            String horarioStr = jTHorario.getText().trim();
+            if (horarioStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese el horario en el formato hh:mm");
+                return;
+            }
+            if (!horarioStr.matches("([01]?\\d|2[0-3]):[0-5]\\d")) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un horario válido en el formato hh:mm");
+                return; // Detener el proceso de guardado si el formato del horario es incorrecto
+            }
+            // Validar capacidad como entero
+            String capacidadStr = jTCapacidad.getText().trim();
+            if (!validaEntero(capacidadStr)) {
+                JOptionPane.showMessageDialog(this, "La capacidad debe ser un número entero válido");
+                return;
+            }
+
+            int capacidad = Integer.parseInt(jTCapacidad.getText());
+
             LocalTime horarioClase = LocalTime.parse(horarioStr);
             String nombreClase = jTNombreClase.getText();
             Entrenador entrenador = (Entrenador) jCBEntrenadores.getSelectedItem();
-            int capacidad = Integer.parseInt(jTCapacidad.getText());
+
             boolean estado = jREstadoClase.isSelected();
             Clase nuevaClase = new Clase(nombreClase, entrenador, horarioClase, capacidad, estado);
             claseData.agregarClase(nuevaClase);
@@ -185,6 +204,7 @@ public class GestionClase extends javax.swing.JInternalFrame {
             jCBEntrenadores.addItem(entrenador1);
         }
     }
+
     private void limpiarCampos() {
         jTNombreClase.setText("");
         jCBEntrenadores.setSelectedIndex(0);
