@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package vistas;
 
 import entities.Entrenador;
@@ -64,14 +60,17 @@ public class GestionEntrenador extends javax.swing.JInternalFrame {
         jCEspecialidad = new javax.swing.JComboBox<>();
         jRBEstado = new javax.swing.JRadioButton();
         jLEstado = new javax.swing.JLabel();
-<<<<<<< HEAD
+
         jLIdEntrenador = new javax.swing.JLabel();
         jTIdEntrenador = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-=======
+
         jBGuardar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
->>>>>>> 739978fac10acc5d3916bfbf3fcf8ccb352ff071
+
+        jBGuardar = new javax.swing.JButton();
+        jBSalir = new javax.swing.JButton();
+
 
         jLDatosEntrenador.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLDatosEntrenador.setText("DATOS ENTRENADOR");
@@ -105,6 +104,7 @@ public class GestionEntrenador extends javax.swing.JInternalFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gym.png"))); // NOI18N
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,7 +131,6 @@ public class GestionEntrenador extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRBEstado)
-<<<<<<< HEAD
                             .addComponent(jCEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,9 +143,13 @@ public class GestionEntrenador extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(44, 44, 44))
-=======
-                            .addComponent(jCEspecialidad, 0, 138, Short.MAX_VALUE))))
+
+                            .addComponent(jCEspecialidad, 0, 138, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
+                            .addComponent(jCEspecialidad, 0, 138, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                         .addComponent(jLDNI)
@@ -158,13 +161,12 @@ public class GestionEntrenador extends javax.swing.JInternalFrame {
                         .addComponent(jBGuardar)
                         .addGap(18, 18, 18)
                         .addComponent(jBSalir)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(layout.createSequentialGroup()
                 .addGap(170, 170, 170)
                 .addComponent(jLDatosEntrenador)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
->>>>>>> 739978fac10acc5d3916bfbf3fcf8ccb352ff071
-        );
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -197,13 +199,11 @@ public class GestionEntrenador extends javax.swing.JInternalFrame {
                             .addComponent(jLEspecialidad)
                             .addComponent(jCEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-<<<<<<< HEAD
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jRBEstado)
                             .addComponent(jLEstado))))
                 .addGap(0, 56, Short.MAX_VALUE))
-=======
-                        .addComponent(jTApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLEspecialidad)
@@ -214,9 +214,7 @@ public class GestionEntrenador extends javax.swing.JInternalFrame {
                     .addComponent(jLEstado)
                     .addComponent(jBGuardar)
                     .addComponent(jBSalir))
-                .addGap(0, 26, Short.MAX_VALUE))
->>>>>>> 739978fac10acc5d3916bfbf3fcf8ccb352ff071
-        );
+                .addGap(0, 26, Short.MAX_VALUE);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

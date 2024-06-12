@@ -50,10 +50,10 @@
                       </Group>
                   </Group>
               </Group>
-<<<<<<< HEAD
+
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-=======
->>>>>>> 739978fac10acc5d3916bfbf3fcf8ccb352ff071
+
+
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace pref="73" max="32767" attributes="0"/>
@@ -70,8 +70,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-<<<<<<< HEAD
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+ <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jTIdEntrenador" min="-2" pref="57" max="-2" attributes="0"/>
                   <Component id="jTDni" min="-2" pref="123" max="-2" attributes="0"/>
@@ -79,13 +78,13 @@
               <EmptySpace pref="77" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-=======
+
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
               <Component id="jLDatosEntrenador" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
->>>>>>> 739978fac10acc5d3916bfbf3fcf8ccb352ff071
+
           </Group>
       </Group>
     </DimensionLayout>
@@ -129,15 +128,18 @@
                           <Component id="jCEspecialidad" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-<<<<<<< HEAD
+
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jRBEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+
+                      <Component id="jTApellido" min="-2" max="-2" attributes="0"/>
+
                   </Group>
               </Group>
               <EmptySpace min="0" pref="56" max="32767" attributes="0"/>
-=======
+
                       <Component id="jTApellido" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -154,7 +156,7 @@
                   <Component id="jBSalir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
->>>>>>> 739978fac10acc5d3916bfbf3fcf8ccb352ff071
+
           </Group>
       </Group>
     </DimensionLayout>
@@ -237,6 +239,7 @@
           <Image iconType="3" name="/images/gym.png"/>
         </Property>
       </Properties>
+
     </Component>
   </SubComponents>
 </Form>
