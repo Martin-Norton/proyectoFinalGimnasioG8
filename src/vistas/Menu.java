@@ -38,6 +38,7 @@ public class Menu extends javax.swing.JFrame {
         jMGestion = new javax.swing.JMenu();
         jMConsultasClase = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMConsultasEntrenadores = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,6 +121,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jMGestion.add(jMenuItem2);
 
+        jMConsultasEntrenadores.setText("Consultas de Entrenadores");
+        jMConsultasEntrenadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMConsultasEntrenadoresActionPerformed(evt);
+            }
+        });
+        jMGestion.add(jMConsultasEntrenadores);
+
         jMenuBar1.add(jMGestion);
 
         jMenu3.setText("Salir");
@@ -159,10 +168,6 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(gav);//agrego al escritorio la ventana 
         escritorio.moveToFront(gav);// traigo al frente la ventana    }  
     }//GEN-LAST:event_jMSocioActionPerformed
-
-    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jMenu3MouseClicked
 
     private void jMEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMEntrenadorActionPerformed
         escritorio.removeAll();// limpia las ventanas
@@ -235,6 +240,20 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(consClase);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jMConsultasEntrenadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMConsultasEntrenadoresActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ConsultasEntrenador consEnt = new ConsultasEntrenador();
+        consEnt.setVisible(true);
+        consEnt.setLocation(10, 10);
+        escritorio.add(consEnt);
+        escritorio.moveToFront(consEnt);
+    }//GEN-LAST:event_jMConsultasEntrenadoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -262,6 +281,8 @@ public class Menu extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -277,6 +298,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMCargaDatos;
     private javax.swing.JMenuItem jMClase;
     private javax.swing.JMenuItem jMConsultasClase;
+    private javax.swing.JMenuItem jMConsultasEntrenadores;
     private javax.swing.JMenuItem jMEntrenador;
     private javax.swing.JMenu jMGestion;
     private javax.swing.JMenuItem jMSocio;

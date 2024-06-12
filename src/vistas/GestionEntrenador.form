@@ -20,6 +20,11 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
+              <Component id="jLDatosEntrenador" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -30,7 +35,7 @@
                       <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jTNombre" max="32767" attributes="0"/>
-                          <Component id="jTApellido" pref="137" max="32767" attributes="0"/>
+                          <Component id="jTApellido" min="-2" pref="137" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -41,26 +46,46 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jRBEstado" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCEspecialidad" pref="138" max="32767" attributes="0"/>
+                          <Component id="jCEspecialidad" min="-2" pref="144" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+<<<<<<< HEAD
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+=======
+>>>>>>> 739978fac10acc5d3916bfbf3fcf8ccb352ff071
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLDNI" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLIdEntrenador" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
+                      <Component id="jLDNI" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jTDni" min="-2" pref="137" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="jBGuardar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jBSalir" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+<<<<<<< HEAD
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTDni" min="-2" pref="137" max="-2" attributes="0"/>
                   <Component id="jTIdEntrenador" min="-2" pref="57" max="-2" attributes="0"/>
+                  <Component id="jTDni" min="-2" pref="123" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="77" max="32767" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+=======
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
               <Component id="jLDatosEntrenador" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+>>>>>>> 739978fac10acc5d3916bfbf3fcf8ccb352ff071
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,25 +93,52 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jLDatosEntrenador" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLNombre" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLApellido" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLNombre" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLApellido" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jTNombre" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jTApellido" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jTDni" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLDNI" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLIdEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTIdEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTDni" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLDNI" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLEspecialidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCEspecialidad" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
+<<<<<<< HEAD
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTApellido" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLIdEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTIdEntrenador" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRBEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                  </Group>
+              </Group>
+              <EmptySpace min="0" pref="56" max="32767" attributes="0"/>
+=======
+                      <Component id="jTApellido" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -98,8 +150,11 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jRBEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBSalir" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
+>>>>>>> 739978fac10acc5d3916bfbf3fcf8ccb352ff071
           </Group>
       </Group>
     </DimensionLayout>
@@ -107,6 +162,9 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLDatosEntrenador">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="14" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="DATOS ENTRENADOR"/>
       </Properties>
     </Component>
@@ -139,20 +197,16 @@
     <Component class="javax.swing.JComboBox" name="jCEspecialidad">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Especialidad&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRBEstado">
       <Properties>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Habiliado"/>
       </Properties>
     </Component>
@@ -161,12 +215,28 @@
         <Property name="text" type="java.lang.String" value="Estado"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLIdEntrenador">
+    <Component class="javax.swing.JButton" name="jBGuardar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nro Entrenador"/>
+        <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBGuardarActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTIdEntrenador">
+    <Component class="javax.swing.JButton" name="jBSalir">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salir"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSalirActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/images/gym.png"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
