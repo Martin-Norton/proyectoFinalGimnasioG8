@@ -46,23 +46,27 @@ public class MembresiaData {
         }
     }
 
-    public List<Membresia> listarMembresia(Socio socio) {
+    public List<Membresia> listarMembresiaxSocio(Socio socio){
+        int id = socio.getIdSocio();
         List<Membresia> membresias = new ArrayList<>();
         String sql = "SELECT * FROM membresias";
+        
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
+            if (rs.next()) {
+                
                 Membresia i = new Membresia();
 
-                i.setIdMembresia(rs.getInt("id_Membresia"));
+                i.setIdMembresia(rs.getInt("Id_Membresia"));
                 i.setCantPases(rs.getInt("CantidadPases"));
                 i.setSocio(socio);
                 i.setFechaInicio(rs.getDate("Fecha_Inicio").toLocalDate());
                 i.setFechaFin(rs.getDate("Fecha_Fin").toLocalDate());
                 i.setCosto(rs.getDouble("Costo"));
                 i.setEstado(rs.getInt("Estado"));
-
                 membresias.add(i);
+                
             }
+        
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripciones: " + ex.getMessage());
         }
@@ -72,11 +76,11 @@ public class MembresiaData {
     public List<Membresia> listarMembresia(){
         List<Membresia> membresia = new ArrayList<>();
         SocioData socioData = new SocioData();
-        String query = "SELECT * FROM socios";
+        String query = "SELECT * FROM membresias";
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
                 Membresia i = new Membresia();
-                i.setIdMembresia(rs.getInt("id_Membresia"));
+                i.setIdMembresia(rs.getInt("Id_Membresia"));
                 i.setCantPases(rs.getInt("CantidadPases"));
                 i.setSocio(socioData.buscarSocio(rs.getInt("Id_Socio")));
                 i.setFechaInicio(rs.getDate("Fecha_Inicio").toLocalDate());

@@ -6,8 +6,15 @@
 package vistas;
 
 import entities.Membresia;
+import entities.Socio;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import persistence.MembresiaData;
+import persistence.SocioData;
 
 /**
  *
@@ -15,11 +22,13 @@ import persistence.MembresiaData;
  */
 public class GestionMembresia extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Membresia
-     */
+    private DefaultTableModel model = new DefaultTableModel();
+    private MembresiaData membresiaData =new MembresiaData();
     public GestionMembresia() {
         initComponents();
+        
+        agregarColumnasATable();
+        rellenarFilas();
     }
 
     /**
@@ -68,6 +77,11 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado:");
 
         jCPases.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8", "12", "20", "I" }));
+        jCPases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCPasesActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,16 +106,36 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
         });
 
         jBBuscarIdSocio.setText("jButton4");
+        jBBuscarIdSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarIdSocioActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Membresia");
 
         jBNuevo.setText("Nuevo");
+        jBNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNuevoActionPerformed(evt);
+            }
+        });
 
         jBRenovar.setText("Renovar");
 
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBCrear.setText("Crear");
+        jBCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCrearActionPerformed(evt);
+            }
+        });
 
         jLCosto.setText("Precio");
         setJMenuBar(jMenuBar1);
@@ -217,13 +251,13 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int id = Integer.parseInt(jTIdmembresia.getText()); // Obtener el ID ingresado en el campo de texto jTMembresia
 
-        MembresiaData membresiaData = new MembresiaData();
+      
         Membresia membresia = membresiaData.buscarMembresia(id); // Llamar al método buscarMembresia de la clase MembresiaData
 
         if (membresia != null) { // Verificar que se haya encontrado la membresía
             jTIdsocio.setText(String.valueOf(membresia.getSocio().getIdSocio())); // Mostrar el ID del socio en el campo de texto jTSocio
             // Mostrar el costo en el label jLCosto
-        
+
             // Comparar el estado de la membresía para seleccionar el radioButton correspondiente
             if (membresia.getEstado() == 1) {
                 jREstado.setSelected(true);
@@ -231,29 +265,157 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
                 jREstado.setSelected(false);
             }
             // Obtener la cantidad de pases de la membresía
-        int canPases = membresia.getCantPases();
-        
-        // Seleccionar automáticamente la opción correspondiente en el combobox jCPases
-        if (canPases == 8) {
-            jCPases.setSelectedIndex(0);
-            jLCosto.setText("$7.000");
-        } else if (canPases == 12) {
-            jCPases.setSelectedIndex(1);
-            jLCosto.setText("$10.000");
-        } else if (canPases == 20) {
-            jCPases.setSelectedIndex(2);
-            jLCosto.setText("$12.000");
-        } else {
-            // Manejar el caso en el que la cantidad de pases no coincida con ninguna de las opciones del combobox
-            JOptionPane.showMessageDialog(this, "Cantidad de pases no válida");
-        }
+            int canPases = membresia.getCantPases();
+
+            // Seleccionar automáticamente la opción correspondiente en el combobox jCPases
+            if (canPases == 8) {
+                jCPases.setSelectedIndex(0);
+                jLCosto.setText("$8.000");
+            } else if (canPases == 12) {
+                jCPases.setSelectedIndex(1);
+                jLCosto.setText("$10.000");
+            } else if (canPases == 20) {
+                jCPases.setSelectedIndex(2);
+                jLCosto.setText("$12.000");
+            } else {
+                // Manejar el caso en el que la cantidad de pases no coincida con ninguna de las opciones del combobox
+                JOptionPane.showMessageDialog(this, "Cantidad de pases no válida");
+            }
         } else {
             // Manejar el caso en el que no se encuentre la membresía
             JOptionPane.showMessageDialog(this, "La membresía no existe");
         }
-        
-    }//GEN-LAST:event_jBBuscarMemActionPerformed
 
+    }//GEN-LAST:event_jBBuscarMemActionPerformed
+    private void agregarColumnasATable() {
+        
+        model.addColumn("Id_Membresia");
+        model.addColumn("Id_Socio");
+        model.addColumn("Nombre");
+        model.addColumn("Apellido");
+        model.addColumn("FechaFin");
+        model.addColumn("CanP");
+        jTable1.setModel(model);
+    }
+    private void rellenarFilas(){
+     //  DefaultTableModel model = (DefaultTableModel) table.getModel();
+       
+        List<Membresia> listaMembresias = membresiaData.listarMembresia(); // Obtener la lista de membresías
+
+        for (Membresia membresia : listaMembresias) {
+            Object[] data = {
+                membresia.getIdMembresia(),
+                membresia.getSocio().getIdSocio(),
+                membresia.getSocio().getNombreSocio(),
+                membresia.getSocio().getApellidoSocio(),
+                membresia.getFechaFin(),
+                membresia.getCantPases()
+            };
+            model.addRow(data);
+        }
+    }
+    public void limpiarTabla() {
+    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+    model.setRowCount(0); // Establecer el número de filas en 0, eliminando todas las filas existentes
+
+}
+    public void comboBox() {
+        int indiceSeleccionado = jCPases.getSelectedIndex();
+        double costo = 0.0;
+
+        switch (indiceSeleccionado) {
+            case 0:
+                costo = 8000; // Costo para 8 pases
+                break;
+            case 1:
+                costo = 10000; // Costo para 12 pases
+                break;
+            case 2:
+                costo = 12000; // Costo para 20 pases
+                break;
+            default:
+                costo = 0.0; // Costo por defecto si no hay selección válida
+                break;
+        }
+
+        // Actualizar el texto de jLCosto con el costo calculado
+        jLCosto.setText(String.valueOf(costo));
+
+    }
+    private void jBCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCrearActionPerformed
+        
+        SocioData socioData = new SocioData();
+        int idSocio = Integer.parseInt(jTIdsocio.getText());
+
+        Socio socio = socioData.buscarSocio(idSocio);
+
+        double costo = Double.parseDouble(jLCosto.getText());
+        int estado = jREstado.isSelected() ? 1 : 0; // Ternary operator para determinar el estado
+        int cantidadPases = 0; // Valor por defecto
+        switch (jCPases.getSelectedIndex()) {
+            case 0:
+                cantidadPases = 8;
+                break;
+            case 1:
+                cantidadPases = 12;
+                break;
+            case 2:
+                cantidadPases = 20;
+                break;
+    }//GEN-LAST:event_jBCrearActionPerformed
+        // Obtener la fecha actual
+        LocalDate fechaActual = LocalDate.now();
+
+        // Agregar 30 días a la fecha actual
+        LocalDate fechaFutura = fechaActual.plusDays(30);
+
+        // Crear un nuevo objeto
+        Membresia nuevaMembresia = new Membresia(1, socio, fechaActual, fechaFutura, cantidadPases, costo, estado);
+        membresiaData.agregarMembresia(nuevaMembresia);
+    }
+    private void jCPasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCPasesActionPerformed
+        comboBox();
+    }//GEN-LAST:event_jCPasesActionPerformed
+
+    private void jBBuscarIdSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarIdSocioActionPerformed
+        limpiarTabla();
+        int idSocio = Integer.parseInt(jTIdsocio.getText());
+        SocioData socioData =new SocioData();
+        Socio socio =socioData.buscarSocio(idSocio);
+        List<Membresia> membresias = membresiaData.listarMembresiaxSocio(socio);
+        
+        for (Membresia membre : membresias) {
+            Object[] data = {
+                membre.getIdMembresia(),
+                membre.getSocio().getIdSocio(),
+                membre.getSocio().getNombreSocio(),
+                membre.getSocio().getApellidoSocio(),
+                membre.getFechaFin(),
+                membre.getCantPases()
+            };
+            model.addRow(data);
+        }
+    }//GEN-LAST:event_jBBuscarIdSocioActionPerformed
+
+    private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jBNuevoActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        limpiarTabla();
+        int id = Integer.parseInt(jTIdmembresia.getText());
+        membresiaData.borrarMembresia(id);
+   
+        rellenarFilas();
+        
+    }//GEN-LAST:event_jBEliminarActionPerformed
+    private void limpiarCampos(){
+        jTIdmembresia.setText("");
+        jTIdsocio.setText("");
+        jLCosto.setText("");
+        jREstado.setSelected(false);
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscarIdSocio;
