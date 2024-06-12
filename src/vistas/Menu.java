@@ -105,7 +105,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMGestion.setText("Consultas");
 
-        jMConsultasClase.setText("Consultas de clases");
+        jMConsultasClase.setText("Consultas de Clases");
         jMConsultasClase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMConsultasClaseActionPerformed(evt);
