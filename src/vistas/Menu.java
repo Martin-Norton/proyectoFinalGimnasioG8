@@ -34,6 +34,7 @@ public class Menu extends javax.swing.JFrame {
         jMEntrenador = new javax.swing.JMenuItem();
         jMClase = new javax.swing.JMenuItem();
         jMAsistencia = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMGestion = new javax.swing.JMenu();
         jMConsultasClase = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -52,6 +53,11 @@ public class Menu extends javax.swing.JFrame {
         );
 
         jMCargaDatos.setText("Gestion Datos");
+        jMCargaDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMCargaDatosActionPerformed(evt);
+            }
+        });
 
         jMSocio.setText("Socio");
         jMSocio.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +90,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMCargaDatos.add(jMAsistencia);
+
+        jMenuItem1.setText("Membresia");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMCargaDatos.add(jMenuItem1);
 
         jMenuBar1.add(jMCargaDatos);
 
@@ -181,6 +195,27 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(gAs);
     }//GEN-LAST:event_jMAsistenciaActionPerformed
 
+    private void jMCargaDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargaDatosActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionMembresia mem = new GestionMembresia();
+        mem.setVisible(true);
+        mem.setLocation(10, 10);
+        escritorio.add(mem);
+        escritorio.moveToFront(mem);
+        
+    }//GEN-LAST:event_jMCargaDatosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+          escritorio.removeAll();
+        escritorio.repaint();
+        GestionMembresia mem = new GestionMembresia();
+        mem.setVisible(true);
+        mem.setLocation(10, 10);
+        escritorio.add(mem);
+        escritorio.moveToFront(mem);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -228,5 +263,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMSocio;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

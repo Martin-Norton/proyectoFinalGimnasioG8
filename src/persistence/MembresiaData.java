@@ -94,7 +94,7 @@ public class MembresiaData {
     public Membresia buscarMembresia (int id){
                 Membresia membresia = null;
                 SocioData socioData = new SocioData();
-        String sql ="SELECT  CantidadPases, Id_Socio, Fecha_Inicio, Fecha_Fin, Costo, Estado FROM membresias WHERE Id_Membresia = ? AND Estado=1";
+        String sql ="SELECT  CantidadPases, Id_Socio, Fecha_Inicio, Fecha_Fin, Costo, Estado FROM membresias WHERE Id_Membresia = ? AND Estado = 1";
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement(sql);
