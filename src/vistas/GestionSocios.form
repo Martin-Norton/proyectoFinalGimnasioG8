@@ -132,11 +132,11 @@
                   <Component id="jTId_Socio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jRBEstado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jBGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jBNuevo" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="jBGuardar" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="jBNuevo" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jBSalir" min="-2" max="-2" attributes="0"/>
               </Group>
