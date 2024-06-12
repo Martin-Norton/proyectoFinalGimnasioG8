@@ -37,11 +37,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMGestion = new javax.swing.JMenu();
         jMConsultasClase = new javax.swing.JMenuItem();
-<<<<<<< Updated upstream
         jMenuItem2 = new javax.swing.JMenuItem();
-=======
-        jMConsultasEntrenadores = new javax.swing.JMenuItem();
->>>>>>> Stashed changes
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -116,7 +112,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jMGestion.add(jMConsultasClase);
 
-<<<<<<< Updated upstream
         jMenuItem2.setText("Consultas de Socios");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,15 +119,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMGestion.add(jMenuItem2);
-=======
-        jMConsultasEntrenadores.setText("Consultas de Entrenadores");
-        jMConsultasEntrenadores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMConsultasEntrenadoresActionPerformed(evt);
-            }
-        });
-        jMGestion.add(jMConsultasEntrenadores);
->>>>>>> Stashed changes
 
         jMenuBar1.add(jMGestion);
 
@@ -218,7 +204,6 @@ public class Menu extends javax.swing.JFrame {
         escritorio.moveToFront(gAs);
     }//GEN-LAST:event_jMAsistenciaActionPerformed
 
-<<<<<<< Updated upstream
     private void jMCargaDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMCargaDatosActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
@@ -249,17 +234,6 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(consClase);
         escritorio.moveToFront(consClase);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-=======
-    private void jMConsultasEntrenadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMConsultasEntrenadoresActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        ConsultasEntrenador gAs = new ConsultasEntrenador();
-        gAs.setVisible(true);
-        gAs.setLocation(10, 10);
-        escritorio.add(gAs);
-        escritorio.moveToFront(gAs);
-    }//GEN-LAST:event_jMConsultasEntrenadoresActionPerformed
->>>>>>> Stashed changes
 
     /**
      * @param args the command line arguments
@@ -288,6 +262,8 @@ public class Menu extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -303,7 +279,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMCargaDatos;
     private javax.swing.JMenuItem jMClase;
     private javax.swing.JMenuItem jMConsultasClase;
-    private javax.swing.JMenuItem jMConsultasEntrenadores;
     private javax.swing.JMenuItem jMEntrenador;
     private javax.swing.JMenu jMGestion;
     private javax.swing.JMenuItem jMSocio;
