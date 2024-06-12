@@ -37,6 +37,7 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMGestion = new javax.swing.JMenu();
         jMConsultasClase = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -110,6 +111,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMGestion.add(jMConsultasClase);
+
+        jMenuItem2.setText("Consultas de Socios");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMGestion.add(jMenuItem2);
 
         jMenuBar1.add(jMGestion);
 
@@ -203,11 +212,11 @@ public class Menu extends javax.swing.JFrame {
         mem.setLocation(10, 10);
         escritorio.add(mem);
         escritorio.moveToFront(mem);
-        
+
     }//GEN-LAST:event_jMCargaDatosActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-          escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
         GestionMembresia mem = new GestionMembresia();
         mem.setVisible(true);
@@ -215,6 +224,16 @@ public class Menu extends javax.swing.JFrame {
         escritorio.add(mem);
         escritorio.moveToFront(mem);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ConsultaSocios consClase = new ConsultaSocios();
+        consClase.setVisible(true);
+        consClase.setLocation(10, 10);
+        escritorio.add(consClase);
+        escritorio.moveToFront(consClase);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,5 +283,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }

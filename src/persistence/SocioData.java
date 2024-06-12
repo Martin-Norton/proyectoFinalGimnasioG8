@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package persistence;
 
 import entities.Socio;
@@ -7,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+/**
+ *
+ * @author carba
+ */
 public class SocioData {
 
     private Connection con = null;
@@ -107,7 +115,7 @@ public class SocioData {
         return socio;
     }
 
-    public Socio listarSociosPorNombreyApellido(String nombre, String apellido) {
+    public Socio buscarSociosPorNombreyApellido(String nombre, String apellido) {
         Socio socio = null;
         String query = "SELECT * FROM socios WHERE Nombre = ? AND Apellido = ?";
         try (PreparedStatement ps = con.prepareStatement(query)) {
@@ -180,7 +188,7 @@ public class SocioData {
                 socio.setEdadSocio(rs.getInt("edad"));
                 socio.setCorreoSocio(rs.getString("correo"));
                 socio.setTelefonoSocio(rs.getString("telefono"));
-                socio.setEstado(rs.getInt("estado"));
+     
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el socio");
@@ -194,7 +202,7 @@ public class SocioData {
     }
 
 public Socio buscarSocioPorDni(String dni) {
-//SELECT `Id_Socio`, `DNI`, `Nombre`, `Apellido`, `Edad`, `Correo`, `Telefono`, `estado` 
+//SELECT Id_Socio, DNI, Nombre, Apellido, Edad, Correo, Telefono, estado 
         Socio socio = null;
         String sql = "SELECT dni, Nombre, Apellido, Edad, Correo, Telefono, estado FROM socios WHERE dni = ? AND estado = 1";
         PreparedStatement ps = null;
@@ -221,8 +229,7 @@ public Socio buscarSocioPorDni(String dni) {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socios: " + ex.getMessage());
         }
-
-        return socio;
-    }
+return socio;
+}
 
 }
