@@ -67,12 +67,21 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMConsultasClaseActionPerformed"/>
               </Events>
             </MenuItem>
+<<<<<<< Updated upstream
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Consultas de Socios"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
+=======
+            <MenuItem class="javax.swing.JMenuItem" name="jMConsultasEntrenadores">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Consultas de Entrenadores"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMConsultasEntrenadoresActionPerformed"/>
+>>>>>>> Stashed changes
               </Events>
             </MenuItem>
           </SubComponents>
