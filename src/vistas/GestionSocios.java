@@ -27,7 +27,6 @@ public class GestionSocios extends javax.swing.JInternalFrame {
         socioData = new SocioData();
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,8 +44,6 @@ public class GestionSocios extends javax.swing.JInternalFrame {
         jTTelefono = new javax.swing.JTextField();
         jLDni = new javax.swing.JLabel();
         jTDni = new javax.swing.JTextField();
-        jLNroSocio = new javax.swing.JLabel();
-        jTId_Socio = new javax.swing.JTextField();
         jBSalir = new javax.swing.JButton();
         jBNuevo = new javax.swing.JButton();
         jBGuardar = new javax.swing.JButton();
@@ -69,8 +66,6 @@ public class GestionSocios extends javax.swing.JInternalFrame {
         jLTelefono.setText("Telefono");
 
         jLDni.setText("DNI");
-
-        jLNroSocio.setText("Nro Socio");
 
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
         jBSalir.setText("Salir");
@@ -129,23 +124,20 @@ public class GestionSocios extends javax.swing.JInternalFrame {
                             .addComponent(jTEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTDni, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLCorreo)
-                            .addComponent(jLNroSocio))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTCorreo)
-                            .addComponent(jTId_Socio, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addComponent(jLTelefono)
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRBEstado)))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jBNuevo)
                         .addGap(18, 18, 18)
-                        .addComponent(jBGuardar)))
+                        .addComponent(jBGuardar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLCorreo)
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRBEstado)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(jLTelefono)
+                                .addGap(31, 31, 31)
+                                .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(jBSalir)
                 .addGap(43, 43, 43))
@@ -186,12 +178,9 @@ public class GestionSocios extends javax.swing.JInternalFrame {
                     .addComponent(jLTelefono)
                     .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLCorreo))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLNroSocio)
-                    .addComponent(jTId_Socio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRBEstado))
-                .addGap(36, 36, 36)
+                .addGap(28, 28, 28)
+                .addComponent(jRBEstado)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,7 +224,6 @@ public class GestionSocios extends javax.swing.JInternalFrame {
         jTEdad.setText("");
         jTCorreo.setText("");
         jTTelefono.setText("");
-        jTId_Socio.setText("");
 
     }
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
@@ -257,11 +245,17 @@ public class GestionSocios extends javax.swing.JInternalFrame {
             if (!validaEntero(dni)) {
                 throw new Exception("El DNI debe ser un número entero válido");
             }
+            // Validar que el DNI no esté duplicado
+
+            if (socioData.existeDni(dni)) {
+                throw new Exception("El DNI ya existe");
+            }
+
             if (!validaEntero(edad)) {
                 throw new Exception("La edad debe ser un número entero válido");
             }
             // Validar que el correo electrónico no esté vacío
-           if (!validaCorreo(correo)) {
+            if (!validaCorreo(correo)) {
                 throw new Exception("El correo electrónico no es válido");
             }
 
@@ -321,7 +315,6 @@ public class GestionSocios extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLDni;
     private javax.swing.JLabel jLEdad;
     private javax.swing.JLabel jLNombre;
-    private javax.swing.JLabel jLNroSocio;
     private javax.swing.JLabel jLTelefono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -330,7 +323,6 @@ public class GestionSocios extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTCorreo;
     private javax.swing.JTextField jTDni;
     private javax.swing.JTextField jTEdad;
-    private javax.swing.JTextField jTId_Socio;
     private javax.swing.JTextField jTNombre;
     private javax.swing.JTextField jTTelefono;
     // End of variables declaration//GEN-END:variables

@@ -233,4 +233,24 @@ public Socio buscarSocioPorDni(String dni) {
 return socio;
 }
 
+
+// Método para verificar si el DNI existe en la base de datos
+    public boolean existeDni(String dni) throws SQLException {
+        // Consulta SQL para buscar el DNI en la base de datos
+        String sql = "SELECT COUNT(*) AS count FROM socios WHERE dni = ?";
+
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+            statement.setString(1, dni);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    return count > 0; // Retorna true si el DNI existe, false en caso contrario
+                }
+            }
+        }
+
+        return false;
+    }
+
 }
+
