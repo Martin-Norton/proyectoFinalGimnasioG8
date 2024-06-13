@@ -477,31 +477,39 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
     //----------Metodo para buscar Membresia x idSocio---------------
     private void jBBuscarIdSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarIdSocioActionPerformed
         limpiarTabla();
-        Pattern pattern = Pattern.compile("\\d*");
-        Matcher matcher = pattern.matcher(jTIdsocio.getText());
-        if (matcher.matches()) {
-            int idSocio = Integer.parseInt(jTIdsocio.getText());
-            SocioData socioData = new SocioData();
-            Socio socio = socioData.buscarSocio(idSocio);
+        // Verificar si el campo de Id de Socio está vacío
+    if (jTIdsocio.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese el Id de Socio");
+        return;
+    }
+    
+    Pattern pattern = Pattern.compile("\\d*");
+    Matcher matcher = pattern.matcher(jTIdsocio.getText());
+    if (matcher.matches()) {
+        int idSocio = Integer.parseInt(jTIdsocio.getText());
+        SocioData socioData = new SocioData();
+        Socio socio = socioData.buscarSocio(idSocio);
 
-            try {
-                Membresia membresia = membresiaData.MembresiaxSocio(socio);
+        try {
+            Membresia membresia = membresiaData.MembresiaxSocio(socio);
 
-                Object[] data = {
-                    membresia.getIdMembresia(),
-                    membresia.getSocio().getIdSocio(),
-                    membresia.getSocio().getNombreSocio(),
-                    membresia.getSocio().getApellidoSocio(),
-                    membresia.getFechaFin(),
-                    membresia.getCantPases()
-                };
-                model.addRow(data);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "No se encontraron membresias para el Socio");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese solo números en el campo Id de Socio");
+            Object[] data = {
+                membresia.getIdMembresia(),
+                membresia.getSocio().getIdSocio(),
+                membresia.getSocio().getNombreSocio(),
+                membresia.getSocio().getApellidoSocio(),
+                membresia.getFechaFin(),
+                membresia.getCantPases()
+            };
+            model.addRow(data);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se encontraron membresias para el Socio");
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "Por favor, ingrese solo números en el campo Id de Socio");
+    
+
+}
 
     }//GEN-LAST:event_jBBuscarIdSocioActionPerformed
 //----------Metodo para que el boton Nuevo limpie campos----------
