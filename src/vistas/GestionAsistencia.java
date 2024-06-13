@@ -326,26 +326,38 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
     // se selecciona la clase de la lista que viene con las clases 
     //disponibles en esos horarios y que tengan cupo
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+try {
         ClaseData claseSel = new ClaseData();
         Clase clase = new Clase();
         AsistenciaData asistenciaData = new AsistenciaData();
-        System.out.println(socioAsistencia.getApellidoSocio());
+
         if (socioAsistencia != null) {
+            System.out.println(socioAsistencia.getApellidoSocio());
             String[] valoresSeleccionados = obtenerValoresSeleccionados();
+            
+            if (valoresSeleccionados.length < 4) {
+                throw new IllegalArgumentException("Deberán completarse todos los campos");
+            }
+
             String nombreClase = valoresSeleccionados[0];
             String capacidad = valoresSeleccionados[1];
             String horarioClase = valoresSeleccionados[2];
             int id_clase = Integer.parseInt(valoresSeleccionados[3]);
 
+            if (nombreClase.isEmpty() || capacidad.isEmpty() || horarioClase.isEmpty()) {
+                throw new IllegalArgumentException("Deberán completarse todos los campos");
+            }
+
             clase = claseSel.listarClasesPorId(id_clase);
 
             if (clase != null) {
                 Asistencia asistenciaSocio = new Asistencia(socioAsistencia, clase, LocalDate.now());
-
                 asistenciaData.agregarAsistencia(asistenciaSocio);
             } else {
                 JOptionPane.showMessageDialog(null, "Clase no encontrada.");
+                return;
             }
+
             MembresiaData membresiaData = new MembresiaData();
             Membresia membresia = membresiaData.MembresiaxSocio(socioAsistencia);
             System.out.println("id membresia del q se va a descontar " + membresia.getIdMembresia());
@@ -360,6 +372,50 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Socio no encontrado.");
         }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Error al guardar los datos. Verifique que los campos sean correctos.");
+    } catch (IllegalArgumentException e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage());
+    }
+
+
+
+//        ClaseData claseSel = new ClaseData();
+//        Clase clase = new Clase();
+//        AsistenciaData asistenciaData = new AsistenciaData();
+//        System.out.println(socioAsistencia.getApellidoSocio());
+//        if (socioAsistencia != null) {
+//            String[] valoresSeleccionados = obtenerValoresSeleccionados();
+//            String nombreClase = valoresSeleccionados[0];
+//            String capacidad = valoresSeleccionados[1];
+//            String horarioClase = valoresSeleccionados[2];
+//            int id_clase = Integer.parseInt(valoresSeleccionados[3]);
+//
+//            clase = claseSel.listarClasesPorId(id_clase);
+//
+//            if (clase != null) {
+//                Asistencia asistenciaSocio = new Asistencia(socioAsistencia, clase, LocalDate.now());
+//
+//                asistenciaData.agregarAsistencia(asistenciaSocio);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Clase no encontrada.");
+//            }
+//            MembresiaData membresiaData = new MembresiaData();
+//            Membresia membresia = membresiaData.MembresiaxSocio(socioAsistencia);
+//            System.out.println("id membresia del q se va a descontar " + membresia.getIdMembresia());
+//
+//            if (membresia != null && membresia.getCantPases() > 0) {
+//                membresia.setCantPases(membresia.getCantPases() - 1);
+//                membresiaData.actualizarMembresia(membresia);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "El socio no tiene pases disponibles.");
+//            }
+//
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Socio no encontrado.");
+//        }
 
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
