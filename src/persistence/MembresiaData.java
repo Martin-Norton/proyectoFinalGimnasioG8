@@ -48,7 +48,7 @@ public class MembresiaData {
 
     public Membresia MembresiaxSocio(Socio socio){
         int id = socio.getIdSocio();
-      Membresia i = null;
+      Membresia i = new Membresia();
         String sql = "SELECT * FROM membresias";
         
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
