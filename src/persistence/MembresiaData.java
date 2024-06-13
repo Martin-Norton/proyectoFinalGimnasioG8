@@ -46,16 +46,13 @@ public class MembresiaData {
         }
     }
 
-    public List<Membresia> listarMembresiaxSocio(Socio socio){
+    public Membresia MembresiaxSocio(Socio socio){
         int id = socio.getIdSocio();
-        List<Membresia> membresias = new ArrayList<>();
+      Membresia i = null;
         String sql = "SELECT * FROM membresias";
         
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             if (rs.next()) {
-                
-                Membresia i = new Membresia();
-
                 i.setIdMembresia(rs.getInt("Id_Membresia"));
                 i.setCantPases(rs.getInt("CantidadPases"));
                 i.setSocio(socio);
@@ -63,14 +60,12 @@ public class MembresiaData {
                 i.setFechaFin(rs.getDate("Fecha_Fin").toLocalDate());
                 i.setCosto(rs.getDouble("Costo"));
                 i.setEstado(rs.getInt("Estado"));
-                membresias.add(i);
-                
             }
         
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripciones: " + ex.getMessage());
         }
-        return membresias;
+        return i;
 
     }
     public List<Membresia> listarMembresia(){
@@ -115,13 +110,9 @@ public class MembresiaData {
                 membresia.setFechaFin(rs.getDate("Fecha_Fin").toLocalDate());
                 membresia.setCosto(rs.getInt("Costo"));
                 membresia.setEstado(rs.getInt("Estado"));
-                
-   
-                
-                
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe el Membresia");
+                JOptionPane.showMessageDialog(null, "No existe la Membresia");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -132,7 +123,33 @@ public class MembresiaData {
     
         
     }
+public List<Membresia> listarMembresiaxSocio(Socio socio){
+        int id = socio.getIdSocio();
+        List<Membresia> membresias = new ArrayList<>();
+        String sql = "SELECT * FROM membresias";
+        
+        try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                
+                Membresia i = new Membresia();
 
+                i.setIdMembresia(rs.getInt("Id_Membresia"));
+                i.setCantPases(rs.getInt("CantidadPases"));
+                i.setSocio(socio);
+                i.setFechaInicio(rs.getDate("Fecha_Inicio").toLocalDate());
+                i.setFechaFin(rs.getDate("Fecha_Fin").toLocalDate());
+                i.setCosto(rs.getDouble("Costo"));
+                i.setEstado(rs.getInt("Estado"));
+                membresias.add(i);
+                
+            }
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripciones: " + ex.getMessage());
+        }
+        return membresias;
+
+    }
     public void actualizarMembresia(Membresia membresia) {
         String query = "UPDATE membresias SET CantidadPases=?,Fecha_Inicio=?,Fecha_Fin=?,Costo=?,Estado=? WHERE Id_Membresia LIKE ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {

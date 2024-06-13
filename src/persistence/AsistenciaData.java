@@ -2,15 +2,19 @@ package persistence;
 
 import entities.Asistencia;
 import entities.Clase;
+import entities.Entrenador;
 import entities.Socio;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import java.time.LocalTime;
 
 public class AsistenciaData {
 
     private Connection connection;
+    EntrenadorData ed = new EntrenadorData();
+
     public AsistenciaData() {
         connection = Conexion.getConexion();
     }
@@ -18,9 +22,9 @@ public class AsistenciaData {
     public void agregarAsistencia(Asistencia asistencia) {
         String sql = "INSERT INTO asistencia (Id_Socio, ID_Clase, Fecha_Asistencia) VALUES (?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, asistencia.getSocio().getIdSocio()); 
-            statement.setInt(2, asistencia.getClase().getIdClase()); 
-            statement.setDate(3, Date.valueOf(asistencia.getFechaAsistencia()));  
+            statement.setInt(1, asistencia.getSocio().getIdSocio());
+            statement.setInt(2, asistencia.getClase().getIdClase());
+            statement.setDate(3, Date.valueOf(asistencia.getFechaAsistencia()));
 
             int filasAfectadas = statement.executeUpdate();
             if (filasAfectadas > 0) {
@@ -31,6 +35,40 @@ public class AsistenciaData {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Clase> obtenerClasesDisponibles(String nombreClase) {
+        String sql = "SELECT c.Id_Clase, c.Nombre, c.Id_Entrenador, c.Horario, c.Capacidad, c.Estado "
+                + "FROM clases c "
+                + "WHERE c.Nombre LIKE ? "
+                + "AND c.Capacidad > ("
+                + "    SELECT COUNT(a.Id_Socio) "
+                + "    FROM asistencia a "
+                + "    WHERE a.Id_Clase = c.Id_Clase "
+                + "    AND a.Fecha_Asistencia = CURRENT_DATE"
+                + ")";
+
+        List<Clase> clasesDisponibles = new ArrayList<>();
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, "%" + nombreClase + "%"); // Establecer el parámetro para el patrón de nombre de clase
+
+            try (ResultSet resultSet = ps.executeQuery()) {
+                while (resultSet.next()) {
+                    int idClase = resultSet.getInt("Id_Clase");
+                    String nombre = resultSet.getString("Nombre");
+                    Entrenador e = ed.buscarPorId(resultSet.getInt("Id_Entrenador"));
+                    LocalTime horario = (resultSet.getTime("Horario").toLocalTime());
+                    int capacidad = resultSet.getInt("Capacidad");
+                    boolean estado = resultSet.getBoolean("Estado");
+                    Clase clasePosible = new Clase(idClase, nombre, e, horario, capacidad, estado);
+                    clasesDisponibles.add(clasePosible);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clasesDisponibles;
     }
 
     public void actualizarAsistencia(Asistencia asistencia) {
@@ -101,7 +139,7 @@ public class AsistenciaData {
         try {
             String sql = "SELECT * FROM asistencia";
             PreparedStatement ps = connection.prepareStatement(sql);
-            
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Asistencia asistencia = new Asistencia();
@@ -126,6 +164,3 @@ public class AsistenciaData {
         return asistencias;
     }
 }
-
-
-
