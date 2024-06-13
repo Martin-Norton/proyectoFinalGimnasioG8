@@ -264,19 +264,19 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
                             .addComponent(jCPases, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel5)
-                                .addComponent(jREstado))
+                            .addComponent(jREstado)
+                            .addComponent(jLabel5)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
                                 .addComponent(jLFecha)))))
                 .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBNuevo)
-                    .addComponent(jBEliminar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jBRenovar)
-                        .addComponent(jBCrear)))
+                        .addComponent(jBCrear))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBNuevo)
+                        .addComponent(jBEliminar)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
@@ -509,6 +509,8 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
         limpiarCampos();
         jBEliminar.setEnabled(false);
         jBRenovar.setEnabled(false);
+        limpiarTabla();
+         rellenarFilas();
     }//GEN-LAST:event_jBNuevoActionPerformed
     //----------Metodo para eliminar una Membresia--------------------
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
@@ -517,7 +519,7 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
         membresiaData.borrarMembresia(id);
 
         rellenarFilas();
-
+       
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBRenovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRenovarActionPerformed
@@ -555,11 +557,12 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
     //-----------Limpieza de campos------------------------------------
     private void limpiarCampos() {
+      
         jTIdmembresia.setText("");
         jTIdsocio.setText("");
         jLCosto.setText("");
         jREstado.setSelected(false);
-        rellenarFilas();
+        
     }
 
 
