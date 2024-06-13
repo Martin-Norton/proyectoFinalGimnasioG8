@@ -21,7 +21,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
     private SocioData socioData = new SocioData();
     private ClaseData claseData = new ClaseData();
     private AsistenciaData asistenciaDAta = new AsistenciaData();
-    private Socio socio = new Socio();
+    private Socio socioAsistencia;
     private List<Clase> clases = new ArrayList<>();
     private DefaultTableModel modelo = new DefaultTableModel() {
         @Override
@@ -33,6 +33,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
     public GestionAsistencia() {
         initComponents();
         this.clases = claseData.listarClases();
+        socioAsistencia = new Socio();
         llenarCombo();
         llenarComboBoxClases();
 
@@ -48,7 +49,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
         jBBuscarSocio = new javax.swing.JButton();
         jTFNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jCBClase = new javax.swing.JComboBox();
+        jCBClase = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jCBHorario = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -165,9 +166,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel5)))
                                 .addGap(127, 127, 127)
                                 .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jCBClase, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -238,17 +237,17 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
         Boolean socioHabilitado = false;
 
         // buscar socio por DNI
-        Socio socio1 = socioData.buscarSocioPorDni(dni);
-        int idsocio = socio1.getIdSocio();
+        socioAsistencia = socioData.buscarSocioPorDni(dni);
+        int idsocio = socioAsistencia.getIdSocio();
 
         if (dni.isEmpty()) { // valido el campo
             JOptionPane.showMessageDialog(this, "Ingrese un DNI válido.");
             return;
         }
         try {
-            if (socio1 != null) {
-                jTFNombre.setText(socio1.getNombreSocio());
-                jTFApellido.setText(socio1.getApellidoSocio());
+            if (socioAsistencia != null) {
+                jTFNombre.setText(socioAsistencia.getNombreSocio());
+                jTFApellido.setText(socioAsistencia.getApellidoSocio());
                 llenarComboBoxClases();
             } else {
                 JOptionPane.showMessageDialog(this, "Socio no encontrado.");
@@ -260,7 +259,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
 
         // busco si tiene membresia el socio y la cantidad de pases
         MembresiaData membresiaData = new MembresiaData();
-        Membresia membresiaSocio = membresiaData.MembresiaxSocio(socio);
+        Membresia membresiaSocio = membresiaData.MembresiaxSocio(socioAsistencia);
 
         if (membresiaSocio != null) {
             int cantPases = membresiaSocio.getCantPases();
@@ -329,39 +328,39 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         ClaseData claseSel = new ClaseData();
         Clase clase = new Clase();
-
         AsistenciaData asistenciaData = new AsistenciaData();
-        
-
-        String dni = jTDniSocio.getText();
-        System.out.println("dni"+ dni);
-        // buscar socio por DNI
-        
-        Socio socio1 = socioData.buscarSocioPorDni(dni);
-        System.out.println("socio " + socio);
-        if (socio1 != null) {
+        System.out.println(socioAsistencia.getApellidoSocio());
+        if (socioAsistencia != null) {
             String[] valoresSeleccionados = obtenerValoresSeleccionados();
             String nombreClase = valoresSeleccionados[0];
             String capacidad = valoresSeleccionados[1];
             String horarioClase = valoresSeleccionados[2];
             int id_clase = Integer.parseInt(valoresSeleccionados[3]);
-           // System.out.println("no"+ nombreClase +"cap "+ capacidad); funciona bien la seleccion
-           
+
             clase = claseSel.listarClasesPorId(id_clase);
-            //System.out.println("clase " + clase); funciona bien trae la clase
-//INSERT INTO `asistencia`(`ID_Asistencia`, `ID_Socio`, `ID_Clase`, `Fecha_Asistencia`) VALUES
-            int id_socio = socio.getIdSocio();
+            
+            if (clase != null) {
+                Asistencia asistenciaSocio = new Asistencia(socioAsistencia, clase, LocalDate.now());
 
-            Asistencia asistenciaSocio = new Asistencia(socio1, clase, LocalDate.now());
+                asistenciaData.agregarAsistencia(asistenciaSocio);
+            } else {
+                JOptionPane.showMessageDialog(null, "Clase no encontrada.");
+            }
+            MembresiaData membresiaData = new MembresiaData();
+            Membresia membresia = membresiaData.MembresiaxSocio(socioAsistencia);
+            System.out.println("id membresia del q se va a descontar " + membresia.getIdMembresia());
 
-            asistenciaData.agregarAsistencia(asistenciaSocio);
-            // creamos una asistencia
+            if (membresia != null && membresia.getCantPases() > 0) {
+                membresia.setCantPases(membresia.getCantPases() - 1);
+                membresiaData.actualizarMembresia(membresia);
+            } else {
+                JOptionPane.showMessageDialog(null, "El socio no tiene pases disponibles.");
+            }
+            
         } else {
-            // Manejar el caso en que el socio no haya sido encontrado
             JOptionPane.showMessageDialog(null, "Socio no encontrado.");
         }
 
-        // restar un pase (update de la memebresia de ese socio)
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private String[] obtenerValoresSeleccionados() {
@@ -507,7 +506,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBBuscarSocio;
     private javax.swing.JButton jBSalir;
     private javax.swing.JButton jButtonGuardar;
-    private javax.swing.JComboBox jCBClase;
+    private javax.swing.JComboBox<Clase> jCBClase;
     private javax.swing.JComboBox<String> jCBHorario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

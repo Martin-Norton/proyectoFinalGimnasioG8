@@ -204,7 +204,7 @@ public class SocioData {
 public Socio buscarSocioPorDni(String dni) {
 //SELECT Id_Socio, DNI, Nombre, Apellido, Edad, Correo, Telefono, estado 
         Socio socio = null;
-        String sql = "SELECT dni, Nombre, Apellido, Edad, Correo, Telefono, estado FROM socios WHERE dni = ? AND estado = 1";
+        String sql = "SELECT Id_Socio, dni, Nombre, Apellido, Edad, Correo, Telefono, estado FROM socios WHERE dni = ? AND estado = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -214,6 +214,7 @@ public Socio buscarSocioPorDni(String dni) {
 
             if (rs.next()) {
                 socio = new Socio();
+                socio.setIdSocio(rs.getInt("Id_Socio"));
                 socio.setDniSocio(dni);
                 socio.setNombreSocio(rs.getString("nombre"));
                 socio.setApellidoSocio(rs.getString("apellido"));

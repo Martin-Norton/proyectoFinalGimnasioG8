@@ -187,11 +187,19 @@ public class GestionClase extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "La capacidad debe ser un número entero válido");
                 return;
             }
+            String nombreClase = jTNombreClase.getText().trim();
+            if (nombreClase.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese el nombre de la clase");
+                return;
+            }
+            // Optional: Validate nombreClase format (e.g., no special characters, max length)
+            if (!nombreClase.matches("[a-zA-Z0-9 ]+")) {
+                JOptionPane.showMessageDialog(this, "El nombre de la clase debe contener solo letras, números y espacios");
+                return;
+            }
 
             int capacidad = Integer.parseInt(jTCapacidad.getText());
-
             LocalTime horarioClase = LocalTime.parse(horarioStr);
-            String nombreClase = jTNombreClase.getText();
             Entrenador entrenador = (Entrenador) jCBEntrenadores.getSelectedItem();
 
             boolean estado = jREstadoClase.isSelected();

@@ -20,17 +20,28 @@ public class AsistenciaData {
     }
 
     public void agregarAsistencia(Asistencia asistencia) {
-        String sql = "INSERT INTO asistencia (Id_Socio, ID_Clase, Fecha_Asistencia) VALUES (?, ?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, asistencia.getSocio().getIdSocio());
-            statement.setInt(2, asistencia.getClase().getIdClase());
-            statement.setDate(3, Date.valueOf(asistencia.getFechaAsistencia()));
+        String checkSocioSql = "SELECT COUNT(*) FROM socios WHERE Id_Socio = ?";
+        String insertAsistenciaSql = "INSERT INTO asistencia (Id_Socio, ID_Clase, Fecha_Asistencia) VALUES (?, ?, ?)";
 
-            int filasAfectadas = statement.executeUpdate();
-            if (filasAfectadas > 0) {
-                JOptionPane.showMessageDialog(null, "Asistencia agregada exitosamente.");
+        try (PreparedStatement checkStatement = connection.prepareStatement(checkSocioSql)) {
+            checkStatement.setInt(1, asistencia.getSocio().getIdSocio());
+
+            ResultSet rs = checkStatement.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                try (PreparedStatement insertStatement = connection.prepareStatement(insertAsistenciaSql)) {
+                    insertStatement.setInt(1, asistencia.getSocio().getIdSocio());
+                    insertStatement.setInt(2, asistencia.getClase().getIdClase());
+                    insertStatement.setDate(3, Date.valueOf(asistencia.getFechaAsistencia()));
+
+                    int filasAfectadas = insertStatement.executeUpdate();
+                    if (filasAfectadas > 0) {
+                        JOptionPane.showMessageDialog(null, "Asistencia agregada exitosamente.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al agregar la asistencia.");
+                    }
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Error al agregar la asistencia.");
+                JOptionPane.showMessageDialog(null, "El socio con Id_Socio = " + asistencia.getSocio().getIdSocio() + " no existe.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,9 +61,9 @@ public class AsistenciaData {
 
                 if (rs.next()) {
                     capAct = rs.getInt("SociosPresentes");
-                    
+
                 }
-                
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
