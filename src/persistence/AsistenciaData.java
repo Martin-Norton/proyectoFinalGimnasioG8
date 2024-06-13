@@ -37,6 +37,29 @@ public class AsistenciaData {
         }
     }
 
+    public int obtenerCapacidadActual(String nombreClase) {
+        String sql = "SELECT COUNT(a.Id_Socio) AS SociosPresentes "
+                + "FROM asistencia a "
+                + "INNER JOIN clases c ON a.Id_Clase = c.Id_Clase "
+                + "WHERE c.Nombre LIKE ? "
+                + "AND a.Fecha_Asistencia = CURRENT_DATE";
+        int capAct = 0;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, nombreClase);
+            try (ResultSet rs = ps.executeQuery()) {
+
+                if (rs.next()) {
+                    capAct = rs.getInt("SociosPresentes");
+                    
+                }
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return capAct;
+    }
+
     public List<Clase> obtenerClasesDisponibles(String nombreClase) {
         String sql = "SELECT c.Id_Clase, c.Nombre, c.Id_Entrenador, c.Horario, c.Capacidad, c.Estado "
                 + "FROM clases c "
