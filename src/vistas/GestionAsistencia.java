@@ -236,43 +236,43 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
         String dni = jTDniSocio.getText();
         Boolean socioHabilitado = false;
 
-        // buscar socio por DNI
-        socioAsistencia = socioData.buscarSocioPorDni(dni);
-        int idsocio = socioAsistencia.getIdSocio();
-
-        if (dni.isEmpty()) { // valido el campo
-            JOptionPane.showMessageDialog(this, "Ingrese un DNI válido.");
-            return;
-        }
         try {
+            // buscar socio por DNI
+            socioAsistencia = socioData.buscarSocioPorDni(dni);
+
+            if (dni.isEmpty()) { // valido el campo
+                JOptionPane.showMessageDialog(this, "Ingrese un DNI válido.");
+                return;
+            }
+
             if (socioAsistencia != null) {
+                int idsocio = socioAsistencia.getIdSocio();
                 jTFNombre.setText(socioAsistencia.getNombreSocio());
                 jTFApellido.setText(socioAsistencia.getApellidoSocio());
                 llenarComboBoxClases();
+
+                // busco si tiene membresia el socio y la cantidad de pases
+                MembresiaData membresiaData = new MembresiaData();
+                Membresia membresiaSocio = membresiaData.MembresiaxSocio(socioAsistencia);
+
+                if (membresiaSocio != null) {
+                    int cantPases = membresiaSocio.getCantPases();
+                    if (cantPases > 0) {
+                        socioHabilitado = true;
+                        buscarClasesDisponibles();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "No tiene pases disponibles");
+                        socioHabilitado = false;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "No tiene membresia disponible");
+                }
             } else {
                 JOptionPane.showMessageDialog(this, "Socio no encontrado.");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al buscar el socio.");
-        }
-
-        // busco si tiene membresia el socio y la cantidad de pases
-        MembresiaData membresiaData = new MembresiaData();
-        Membresia membresiaSocio = membresiaData.MembresiaxSocio(socioAsistencia);
-
-        if (membresiaSocio != null) {
-            int cantPases = membresiaSocio.getCantPases();
-            if (cantPases > 0) {
-                socioHabilitado = true;
-                buscarClasesDisponibles();
-            } else {
-                JOptionPane.showMessageDialog(this, "No tiene pases disponibles");
-                socioHabilitado = false;
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "No tiene membresia disponible");
-
         }
     }//GEN-LAST:event_jBBuscarSocioActionPerformed
 
@@ -338,7 +338,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
             int id_clase = Integer.parseInt(valoresSeleccionados[3]);
 
             clase = claseSel.listarClasesPorId(id_clase);
-            
+
             if (clase != null) {
                 Asistencia asistenciaSocio = new Asistencia(socioAsistencia, clase, LocalDate.now());
 
@@ -356,7 +356,7 @@ public class GestionAsistencia extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "El socio no tiene pases disponibles.");
             }
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Socio no encontrado.");
         }

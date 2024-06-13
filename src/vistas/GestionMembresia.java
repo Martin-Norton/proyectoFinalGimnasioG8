@@ -5,14 +5,14 @@ package vistas;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import entities.Membresia;
 import entities.Socio;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import persistence.MembresiaData;
@@ -301,16 +301,16 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
                     jBEliminar.setEnabled(true);
                     int pases = membresia.getCantPases();
                     jLFecha.setText(fechaFin.toString());
-                        jTIdsocio.setText(ids);
+                    jTIdsocio.setText(ids);
                     if (fechaFin.isBefore(fechaActual)) {
                         JOptionPane.showMessageDialog(this, "La fecha de pago ya venció, hay que renovar membresía.");
                         jBRenovar.setEnabled(true);
-                    } else if(pases==0){
+                    } else if (pases == 0) {
                         JOptionPane.showMessageDialog(this, "Pases agotados hay que renovar membresia");
                         jBRenovar.setEnabled(true);
-                        
-                    }else{
-                        
+
+                    } else {
+
                         jTIdsocio.setText(ids);
                         jREstado.setSelected(membresia.getEstado() == 1);
                         // Setear la fecha fin en el campo jLFecha
@@ -422,33 +422,40 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
                 Socio socio = socioData.buscarSocio(idSocio);
 
                 if (socio != null) {
-                    try {
-                        double costo = Double.parseDouble(jLCosto.getText());
-                        boolean estado = jREstado.isSelected();
-                        if (estado) {
-                            int cantidadPases = 0;
-                            switch (jCPases.getSelectedIndex()) {
-                                case 0:
-                                    cantidadPases = 8;
-                                    break;
-                                case 1:
-                                    cantidadPases = 12;
-                                    break;
-                                case 2:
-                                    cantidadPases = 20;
-                                    break;
+                    // Verificar si ya existe una membresía asociada al socio
+                    Membresia membresiaExistente = membresiaData.MembresiaxSocio(socio);
+
+                    if (membresiaExistente == null) {
+                        try {
+                            double costo = Double.parseDouble(jLCosto.getText());
+                            boolean estado = jREstado.isSelected();
+                            if (estado) {
+                                int cantidadPases = 0;
+                                switch (jCPases.getSelectedIndex()) {
+                                    case 0:
+                                        cantidadPases = 8;
+                                        break;
+                                    case 1:
+                                        cantidadPases = 12;
+                                        break;
+                                    case 2:
+                                        cantidadPases = 20;
+                                        break;
+                                }
+
+                                LocalDate fechaActual = LocalDate.now();
+                                LocalDate fechaFutura = fechaActual.plusDays(30);
+
+                                Membresia nuevaMembresia = new Membresia(1, socio, fechaActual, fechaFutura, cantidadPases, costo, estado ? 1 : 0);
+                                membresiaData.agregarMembresia(nuevaMembresia);
+                            } else {
+                                JOptionPane.showMessageDialog(this, "El estado debe estar en true para poder crear una membrecía.");
                             }
-
-                            LocalDate fechaActual = LocalDate.now();
-                            LocalDate fechaFutura = fechaActual.plusDays(30);
-
-                            Membresia nuevaMembresia = new Membresia(1, socio, fechaActual, fechaFutura, cantidadPases, costo, estado ? 1 : 0);
-                            membresiaData.agregarMembresia(nuevaMembresia);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "El estado debe estar en true para poder crear una membrecía.");
+                        } catch (NumberFormatException e) {
+                            JOptionPane.showMessageDialog(this, "Debe ingresar un valor numérico válido para el costo.");
                         }
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Debe ingresar un valor numérico válido para el costo.");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Ya existe una membresía para el socio. No se puede crear una nueva membresía.");
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "El socio no existe. Debe crear uno para poder crear una membrecía.");
@@ -459,8 +466,8 @@ public class GestionMembresia extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "El campo de ID socio no puede estar vacío.");
         }
-limpiarTabla();
-rellenarFilas();
+        limpiarTabla();
+        rellenarFilas();
     }//GEN-LAST:event_jBCrearActionPerformed
 
     //---------Metodo que al precionar el conbo se sete costo--------
@@ -470,24 +477,34 @@ rellenarFilas();
     //----------Metodo para buscar Membresia x idSocio---------------
     private void jBBuscarIdSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarIdSocioActionPerformed
         limpiarTabla();
-        int idSocio = Integer.parseInt(jTIdsocio.getText());
-        SocioData socioData = new SocioData();
-        Socio socio = socioData.buscarSocio(idSocio);
-        List<Membresia> membresias = membresiaData.listarMembresiaxSocio(socio);
+        Pattern pattern = Pattern.compile("\\d*");
+        Matcher matcher = pattern.matcher(jTIdsocio.getText());
+        if (matcher.matches()) {
+            int idSocio = Integer.parseInt(jTIdsocio.getText());
+            SocioData socioData = new SocioData();
+            Socio socio = socioData.buscarSocio(idSocio);
 
-        for (Membresia membre : membresias) {
-            Object[] data = {
-                membre.getIdMembresia(),
-                membre.getSocio().getIdSocio(),
-                membre.getSocio().getNombreSocio(),
-                membre.getSocio().getApellidoSocio(),
-                membre.getFechaFin(),
-                membre.getCantPases()
-            };
-            model.addRow(data);
+            try {
+                Membresia membresia = membresiaData.MembresiaxSocio(socio);
+
+                Object[] data = {
+                    membresia.getIdMembresia(),
+                    membresia.getSocio().getIdSocio(),
+                    membresia.getSocio().getNombreSocio(),
+                    membresia.getSocio().getApellidoSocio(),
+                    membresia.getFechaFin(),
+                    membresia.getCantPases()
+                };
+                model.addRow(data);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "No se encontraron membresias para el Socio");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese solo números en el campo Id de Socio");
         }
+
     }//GEN-LAST:event_jBBuscarIdSocioActionPerformed
-    //----------Metodo para que el boton Nuevo limpie campos----------
+//----------Metodo para que el boton Nuevo limpie campos----------
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
         limpiarCampos();
         jBEliminar.setEnabled(false);
@@ -512,7 +529,7 @@ rellenarFilas();
         LocalDate fechaFutura = fechaActual.plusDays(30);
         double costo = Double.parseDouble(jLCosto.getText());
         boolean estado = jREstado.isSelected();
-        
+
         if (estado) {
             int cantidadPases = 0;
             switch (jCPases.getSelectedIndex()) {
@@ -525,10 +542,10 @@ rellenarFilas();
                 case 2:
                     cantidadPases = 20;
                     break;
-            }       
-        Membresia nuevaMembresia = new Membresia(id, socio, fechaActual, fechaFutura, cantidadPases, costo, estado ? 1 : 0);
-        membresiaData.actualizarMembresia(nuevaMembresia);
-         JOptionPane.showMessageDialog(this, "Membresia Renovada Exitosamente.");
+            }
+            Membresia nuevaMembresia = new Membresia(id, socio, fechaActual, fechaFutura, cantidadPases, costo, estado ? 1 : 0);
+            membresiaData.actualizarMembresia(nuevaMembresia);
+            JOptionPane.showMessageDialog(this, "Membresia Renovada Exitosamente.");
         }
         jBRenovar.setEnabled(false);
     }//GEN-LAST:event_jBRenovarActionPerformed
@@ -542,7 +559,7 @@ rellenarFilas();
         jTIdsocio.setText("");
         jLCosto.setText("");
         jREstado.setSelected(false);
-
+        rellenarFilas();
     }
 
 
